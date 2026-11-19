@@ -1,0 +1,436 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Nova Ordem de Serviço - Sandoval TI
+{% endblock %}
+
+{% block content %}
+
+<!-- CABEÇALHO -->
+
+<div class="page-header mb-4 d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
+
+    <div>
+
+        <h2 class="page-title">
+
+            <i class="bi bi-plus-circle"></i>
+
+            Nova Ordem de Serviço
+
+        </h2>
+
+        <p class="page-subtitle">
+
+            Cadastre um novo atendimento técnico realizado pela Sandoval TI.
+
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <a
+            href="{% url 'ordens' %}"
+            class="btn btn-secondary"
+        >
+
+            <i class="bi bi-arrow-left"></i>
+
+            Voltar
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- FORMULÁRIO -->
+
+<div class="card sandoval-card">
+
+    <div class="card-header sandoval-card-header">
+
+        <i class="bi bi-clipboard-plus"></i>
+
+        Dados da Ordem de Serviço
+
+    </div>
+
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- CLIENTE E EQUIPAMENTO -->
+
+            <div class="row">
+
+                <div class="col-md-8 mb-3">
+
+                    <label
+                        for="{{ form.cliente.id_for_label }}"
+                        class="form-label fw-semibold"
+                    >
+
+                        Cliente
+
+                    </label>
+
+                    {{ form.cliente }}
+
+                    {% if form.cliente.errors %}
+
+                        <div class="text-danger small mt-1">
+
+                            {{ form.cliente.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <label
+                        for="{{ form.equipamento.id_for_label }}"
+                        class="form-label fw-semibold"
+                    >
+
+                        Equipamento
+
+                    </label>
+
+                    {{ form.equipamento }}
+
+                    {% if form.equipamento.errors %}
+
+                        <div class="text-danger small mt-1">
+
+                            {{ form.equipamento.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- MARCA E MODELO -->
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label
+                        for="{{ form.marca.id_for_label }}"
+                        class="form-label fw-semibold"
+                    >
+
+                        Marca
+
+                    </label>
+
+                    {{ form.marca }}
+
+                    {% if form.marca.errors %}
+
+                        <div class="text-danger small mt-1">
+
+                            {{ form.marca.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+
+                    <label
+                        for="{{ form.modelo.id_for_label }}"
+                        class="form-label fw-semibold"
+                    >
+
+                        Modelo
+
+                    </label>
+
+                    {{ form.modelo }}
+
+                    {% if form.modelo.errors %}
+
+                        <div class="text-danger small mt-1">
+
+                            {{ form.modelo.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <!-- ACESSÓRIOS RECEBIDOS E ESTADO FÍSICO -->
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label
+                        for="{{ form.acessorios.id_for_label }}"
+                        class="form-label fw-semibold"
+                    >
+                        Acessórios recebidos
+                    </label>
+
+                    {{ form.acessorios }}
+
+                    {% if form.acessorios.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ form.acessorios.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label
+                        for="{{ form.estado_fisico.id_for_label }}"
+                        class="form-label fw-semibold"
+                    >
+                        Estado físico do equipamento
+                    </label>
+
+                    {{ form.estado_fisico }}
+
+                    {% if form.estado_fisico.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ form.estado_fisico.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- PROBLEMA -->
+
+            <div class="mb-3">
+
+                <label
+                    for="{{ form.problema.id_for_label }}"
+                    class="form-label fw-semibold"
+                >
+
+                    Problema informado
+
+                </label>
+
+                {{ form.problema }}
+
+                {% if form.problema.errors %}
+
+                    <div class="text-danger small mt-1">
+
+                        {{ form.problema.errors }}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- DIAGNÓSTICO -->
+
+            <div class="mb-3">
+
+                <label
+                    for="{{ form.diagnostico.id_for_label }}"
+                    class="form-label fw-semibold"
+                >
+
+                    Diagnóstico técnico
+
+                </label>
+
+                {{ form.diagnostico }}
+
+                {% if form.diagnostico.errors %}
+
+                    <div class="text-danger small mt-1">
+
+                        {{ form.diagnostico.errors }}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- SERVIÇO REALIZADO -->
+
+            <div class="mb-3">
+
+                <label
+                    for="{{ form.servico_realizado.id_for_label }}"
+                    class="form-label fw-semibold"
+                >
+
+                    Serviço realizado
+
+                </label>
+
+                {{ form.servico_realizado }}
+
+                {% if form.servico_realizado.errors %}
+
+                    <div class="text-danger small mt-1">
+
+                        {{ form.servico_realizado.errors }}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- VALOR E STATUS -->
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <label
+                        for="{{ form.valor.id_for_label }}"
+                        class="form-label fw-semibold"
+                    >
+
+                        Valor
+
+                    </label>
+
+                    {{ form.valor }}
+
+                    {% if form.valor.errors %}
+
+                        <div class="text-danger small mt-1">
+
+                            {{ form.valor.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <label
+                        for="{{ form.status.id_for_label }}"
+                        class="form-label fw-semibold"
+                    >
+
+                        Status
+
+                    </label>
+
+                    {{ form.status }}
+
+                    {% if form.status.errors %}
+
+                        <div class="text-danger small mt-1">
+
+                            {{ form.status.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- OBSERVAÇÕES -->
+
+            <div class="mb-3">
+
+                <label
+                    for="{{ form.observacoes.id_for_label }}"
+                    class="form-label fw-semibold"
+                >
+
+                    Observações
+
+                </label>
+
+                {{ form.observacoes }}
+
+                {% if form.observacoes.errors %}
+
+                    <div class="text-danger small mt-1">
+
+                        {{ form.observacoes.errors }}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- BOTÕES -->
+
+            <div class="d-flex flex-wrap gap-2 mt-4">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary sandoval-btn"
+                >
+
+                    <i class="bi bi-save"></i>
+
+                    Criar Ordem
+
+                </button>
+
+
+                <a
+                    href="{% url 'ordens' %}"
+                    class="btn btn-secondary"
+                >
+
+                    <i class="bi bi-x-circle"></i>
+
+                    Cancelar
+
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

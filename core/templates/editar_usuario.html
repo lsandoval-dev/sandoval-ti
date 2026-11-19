@@ -1,0 +1,158 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Editar Usuário - Sandoval TI
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header mb-4">
+
+    <h2 class="page-title">
+        <i class="bi bi-person-gear"></i>
+        Editar Usuário
+    </h2>
+
+    <p class="page-subtitle">
+        Altere os dados, o perfil e, se necessário, a senha do usuário.
+    </p>
+
+</div>
+
+
+<div class="card sandoval-card">
+
+    <div class="card-header sandoval-card-header">
+        <i class="bi bi-person-gear"></i>
+        Dados do Usuário
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% for field in form %}
+
+                <div class="mb-3">
+
+                    <label
+                        for="{{ field.id_for_label }}"
+                        class="form-label"
+                    >
+                        {{ field.label }}
+                    </label>
+
+                    {% if field.name == 'nova_senha' or field.name == 'confirmar_senha' %}
+
+                        <div class="input-group">
+
+                            {{ field }}
+
+                            <button
+                                class="btn btn-outline-secondary"
+                                type="button"
+                                onclick="alternarSenha('{{ field.id_for_label }}', this)"
+                                aria-label="Mostrar ou ocultar senha"
+                                title="Mostrar ou ocultar senha"
+                            >
+                                <i class="bi bi-eye"></i>
+                            </button>
+
+                        </div>
+
+                    {% else %}
+
+                        {{ field }}
+
+                    {% endif %}
+
+                    {% if field.help_text %}
+                        <div class="form-text">
+                            {{ field.help_text }}
+                        </div>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle"></i>
+                Para manter a senha atual, deixe os dois campos de senha vazios.
+            </div>
+
+
+            <div class="d-flex gap-2 mt-3 flex-wrap">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary sandoval-btn"
+                >
+                    <i class="bi bi-check-circle"></i>
+                    Salvar Alterações
+                </button>
+
+                <a
+                    href="{% url 'usuarios' %}"
+                    class="btn btn-secondary"
+                >
+                    <i class="bi bi-arrow-left"></i>
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+    function alternarSenha(idCampo, botao) {
+
+        const campo = document.getElementById(idCampo);
+
+        if (!campo) {
+            return;
+        }
+
+        const icone = botao.querySelector('i');
+
+        if (campo.type === 'password') {
+
+            campo.type = 'text';
+
+            icone.classList.remove('bi-eye');
+            icone.classList.add('bi-eye-slash');
+
+        } else {
+
+            campo.type = 'password';
+
+            icone.classList.remove('bi-eye-slash');
+            icone.classList.add('bi-eye');
+
+        }
+    }
+</script>
+
+{% endblock %}

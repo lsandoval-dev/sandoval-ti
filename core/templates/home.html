@@ -1,0 +1,483 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Início - Sandoval TI
+{% endblock %}
+
+{% block content %}
+
+<div class="home-container">
+
+    <!-- CABEÇALHO -->
+    <div class="home-header">
+
+        <div>
+            <span class="home-eyebrow">
+                SANDOVAL TI | GESTÃO DE SERVIÇOS
+            </span>
+
+            <h1 class="home-title">
+                Painel de controle
+            </h1>
+
+            <p class="home-subtitle">
+                Bem-vindo, {{ request.user.username }}.
+                Acompanhe os atendimentos e serviços da sua operação.
+            </p>
+        </div>
+
+        <div class="home-header-actions">
+
+            <a href="{% url 'dashboard' %}" class="home-dashboard-link">
+                <i class="bi bi-speedometer2"></i>
+                Dashboard completo
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACESSO RÁPIDO -->
+    <div class="home-quick-actions">
+
+        <a href="{% url 'nova_ordem' %}" class="home-action-primary">
+            <i class="bi bi-plus-circle"></i>
+            Nova ordem de serviço
+        </a>
+
+        <a href="{% url 'clientes' %}" class="home-action-secondary">
+            <i class="bi bi-people"></i>
+            Clientes
+        </a>
+
+        <a href="{% url 'ordens' %}" class="home-action-secondary">
+            <i class="bi bi-clipboard-check"></i>
+            Ordens de serviço
+        </a>
+
+    </div>
+
+
+    <!-- INDICADORES -->
+    <div class="home-section-heading">
+        <div>
+            <h2>Visão geral</h2>
+            <p>Resumo dos registros do sistema</p>
+        </div>
+    </div>
+
+
+    <div class="home-stats">
+
+        <!-- CLIENTES -->
+        <div class="home-stat-card home-stat-clients">
+
+            <div class="home-stat-top">
+                <div class="home-stat-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+
+                <span class="home-stat-label">CLIENTES</span>
+            </div>
+
+            <div class="home-stat-number">
+                {{ total_clientes }}
+            </div>
+
+            <div class="home-stat-description">
+                Total de clientes cadastrados
+            </div>
+
+        </div>
+
+
+        <!-- TOTAL DE ORDENS -->
+        <div class="home-stat-card home-stat-total">
+
+            <div class="home-stat-top">
+                <div class="home-stat-icon">
+                    <i class="bi bi-clipboard-data"></i>
+                </div>
+
+                <span class="home-stat-label">TOTAL DE OS</span>
+            </div>
+
+            <div class="home-stat-number">
+                {{ total_ordens }}
+            </div>
+
+            <div class="home-stat-description">
+                Ordens registradas no sistema
+            </div>
+
+        </div>
+
+
+        <!-- ABERTAS -->
+        <div class="home-stat-card home-stat-open">
+
+            <div class="home-stat-top">
+                <div class="home-stat-icon">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+
+                <span class="home-stat-label">ABERTAS</span>
+            </div>
+
+            <div class="home-stat-number">
+                {{ ordens_abertas }}
+            </div>
+
+            <div class="home-stat-description">
+                Aguardando atendimento
+            </div>
+
+        </div>
+
+
+        <!-- ANDAMENTO -->
+        <div class="home-stat-card home-stat-progress">
+
+            <div class="home-stat-top">
+                <div class="home-stat-icon">
+                    <i class="bi bi-gear-wide-connected"></i>
+                </div>
+
+                <span class="home-stat-label">EM ANDAMENTO</span>
+            </div>
+
+            <div class="home-stat-number">
+                {{ ordens_andamento }}
+            </div>
+
+            <div class="home-stat-description">
+                Serviços em execução
+            </div>
+
+        </div>
+
+
+        <!-- FINALIZADAS -->
+        <div class="home-stat-card home-stat-finished">
+
+            <div class="home-stat-top">
+                <div class="home-stat-icon">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+
+                <span class="home-stat-label">FINALIZADAS</span>
+            </div>
+
+            <div class="home-stat-number">
+                {{ ordens_fechadas }}
+            </div>
+
+            <div class="home-stat-description">
+                Serviços concluídos
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ÁREA DE ACOMPANHAMENTO -->
+    <div class="home-section-heading home-section-spaced">
+        <div>
+            <h2>Acompanhamento</h2>
+            <p>Visualize a situação atual das ordens de serviço</p>
+        </div>
+    </div>
+
+
+    <div class="home-content-grid">
+
+        <!-- GRÁFICO -->
+        <div class="home-panel home-chart-panel">
+
+            <div class="home-panel-header">
+                <div>
+                    <h3>Status das ordens</h3>
+                    <p>Distribuição dos atendimentos</p>
+                </div>
+
+                <i class="bi bi-pie-chart"></i>
+            </div>
+
+            <div class="home-chart-container">
+                <canvas id="homeGraficoOrdens"></canvas>
+            </div>
+
+            <div class="home-chart-legend">
+                <span>
+                    <i class="home-dot home-dot-open"></i>
+                    Abertas
+                </span>
+
+                <span>
+                    <i class="home-dot home-dot-progress"></i>
+                    Em andamento
+                </span>
+
+                <span>
+                    <i class="home-dot home-dot-finished"></i>
+                    Finalizadas
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- ÚLTIMAS ORDENS -->
+        <div class="home-panel">
+
+            <div class="home-panel-header">
+
+                <div>
+                    <h3>Ordens recentes</h3>
+                    <p>Últimos atendimentos registrados</p>
+                </div>
+
+                <a href="{% url 'ordens' %}">
+                    Ver todas
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <div class="home-recent-list">
+
+                {% for ordem in ultimas_ordens %}
+
+                    <div class="home-recent-item">
+
+                        <div class="home-recent-icon">
+                            <i class="bi bi-clipboard-check"></i>
+                        </div>
+
+                        <div class="home-recent-info">
+
+                            <strong>
+                                OS-{{ ordem.id|stringformat:"03d" }}
+                            </strong>
+
+                            <span>
+                                {{ ordem.cliente.nome }}
+                            </span>
+
+                            <small>
+                                {{ ordem.get_equipamento_display }}
+                            </small>
+
+                        </div>
+
+                        <div class="home-recent-status">
+
+                            {% if ordem.status == 'aberta' %}
+                                <span class="home-status home-status-open">
+                                    Aberta
+                                </span>
+
+                            {% elif ordem.status == 'andamento' %}
+                                <span class="home-status home-status-progress">
+                                    Em andamento
+                                </span>
+
+                            {% elif ordem.status == 'fechada' %}
+                                <span class="home-status home-status-finished">
+                                    Finalizada
+                                </span>
+
+                            {% else %}
+                                <span class="home-status home-status-other">
+                                    {{ ordem.get_status_display }}
+                                </span>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% empty %}
+
+                    <div class="home-empty">
+                        <i class="bi bi-inbox"></i>
+                        <p>Nenhuma ordem cadastrada ainda.</p>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CLIENTES RECENTES -->
+    <div class="home-panel home-clients-panel">
+
+        <div class="home-panel-header">
+
+            <div>
+                <h3>Clientes recentes</h3>
+                <p>Últimos clientes cadastrados</p>
+            </div>
+
+            <a href="{% url 'clientes' %}">
+                Ver clientes
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        <div class="home-clients-grid">
+
+            {% for cliente in ultimos_clientes %}
+
+                <div class="home-client-item">
+
+                    <div class="home-client-avatar">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+
+                    <div>
+                        <strong>{{ cliente.nome }}</strong>
+                        <span>{{ cliente.telefone }}</span>
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="home-empty">
+                    <i class="bi bi-people"></i>
+                    <p>Nenhum cliente cadastrado ainda.</p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- RODAPÉ -->
+    <div class="home-footer">
+        <span>
+            <i class="bi bi-shield-check"></i>
+            Sandoval TI — Gestão de serviços técnicos
+        </span>
+
+        <span>
+            Organização, praticidade e controle.
+        </span>
+    </div>
+
+</div>
+
+
+<!-- GRÁFICO -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const homeCanvas = document.getElementById('homeGraficoOrdens');
+
+const homeTotalOrdens = {{ total_ordens }};
+
+const homeDadosStatus = {{ grafico_status|safe }};
+
+
+new Chart(homeCanvas, {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: [
+            'Abertas',
+            'Em andamento',
+            'Finalizadas'
+        ],
+
+        datasets: [{
+
+            data: homeDadosStatus,
+
+            backgroundColor: [
+                '#dc3545',
+                '#e5a900',
+                '#198754'
+            ],
+
+            borderWidth: 0,
+            hoverOffset: 6
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '76%',
+
+        plugins: {
+
+            legend: {
+                display: false
+            },
+
+            tooltip: {
+                enabled: true
+            }
+
+        }
+
+    },
+
+    plugins: [{
+
+        id: 'homeTextoCentro',
+
+        afterDraw(chart) {
+
+            const { ctx, chartArea } = chart;
+
+            if (!chartArea) return;
+
+            const x = (chartArea.left + chartArea.right) / 2;
+            const y = (chartArea.top + chartArea.bottom) / 2;
+
+            ctx.save();
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            ctx.font = 'bold 30px Segoe UI';
+            ctx.fillStyle = '#073179';
+
+            ctx.fillText(homeTotalOrdens, x, y - 9);
+
+            ctx.font = '13px Segoe UI';
+            ctx.fillStyle = '#6c757d';
+
+            ctx.fillText('Ordens', x, y + 17);
+
+            ctx.restore();
+
+        }
+
+    }]
+
+});
+
+</script>
+
+{% endblock %}

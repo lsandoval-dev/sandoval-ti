@@ -1,0 +1,102 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Excluir Usuário - Sandoval TI
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header mb-4">
+
+    <h2 class="page-title">
+        <i class="bi bi-person-x"></i>
+        Excluir Usuário
+    </h2>
+
+    <p class="page-subtitle">
+        Confirme a exclusão do usuário selecionado.
+    </p>
+
+</div>
+
+<div class="card sandoval-card">
+
+    <div class="card-header sandoval-card-header">
+
+        <i class="bi bi-exclamation-triangle"></i>
+        Confirmar exclusão
+
+    </div>
+
+    <div class="card-body">
+
+        <p class="mb-3">
+            Usuário:
+            <strong>{{ usuario.username }}</strong>
+        </p>
+
+        {% if not pode_excluir %}
+
+            <div class="alert alert-warning">
+
+                <h5 class="alert-heading">
+                    <i class="bi bi-shield-lock"></i>
+                    Exclusão protegida
+                </h5>
+
+                {{ motivo_bloqueio }}
+
+            </div>
+
+            <a
+                href="{% url 'usuarios' %}"
+                class="btn btn-secondary"
+            >
+                <i class="bi bi-arrow-left"></i>
+                Voltar para usuários
+            </a>
+
+        {% else %}
+
+            <p class="text-danger">
+
+                <i class="bi bi-exclamation-circle"></i>
+
+                Esta ação não poderá ser desfeita.
+
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="d-flex gap-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger"
+                    >
+                        <i class="bi bi-trash"></i>
+                        Sim, excluir
+                    </button>
+
+                    <a
+                        href="{% url 'usuarios' %}"
+                        class="btn btn-secondary"
+                    >
+                        <i class="bi bi-arrow-left"></i>
+                        Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

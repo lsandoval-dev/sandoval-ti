@@ -1,0 +1,453 @@
+{% extends 'base.html' %}
+
+{% block title %}Usuários - Sandoval TI{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+
+<div>
+    <h2 class="page-title mb-1">
+        <i class="bi bi-people-fill"></i>
+        Gerenciar Usuários
+    </h2>
+
+    <p class="text-muted mb-0">
+        Usuários cadastrados no sistema
+    </p>
+</div>
+
+<button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#modalNovoUsuario">
+
+    <i class="bi bi-person-plus-fill"></i>
+    Novo Usuário
+
+</button>
+
+
+</div>
+
+<div class="card shadow-sm border-0">
+
+
+<div class="card-body">
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle mb-0">
+
+            <thead class="table-light">
+
+                <tr>
+
+                    <th>
+                        <i class="bi bi-person"></i>
+                        Usuário
+                    </th>
+
+                    <th>
+                        <i class="bi bi-shield-check"></i>
+                        Perfil
+                    </th>
+
+                    <th>
+                        <i class="bi bi-toggle-on"></i>
+                        Status
+                    </th>
+
+                    <th class="text-end">
+                        Ações
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for usuario in usuarios %}
+
+                <tr>
+
+                    <td>
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="me-3">
+
+                                <i class="bi bi-person-circle fs-3 text-secondary"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    {{ usuario.username }}
+                                </strong>
+
+                                {% if usuario.is_superuser %}
+
+                                <div class="small text-muted">
+                                    Superusuário
+                                </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        {% if usuario.is_superuser %}
+
+                            <span class="badge bg-danger">
+                                Administrador
+                            </span>
+
+                        {% elif usuario.groups.first %}
+
+                            <span class="badge bg-primary">
+                                {{ usuario.groups.first.name }}
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+                                Sem perfil
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if usuario.is_active %}
+
+                            <span class="badge bg-success">
+                                <i class="bi bi-check-circle"></i>
+                                Ativo
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+                                <i class="bi bi-x-circle"></i>
+                                Inativo
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+
+                    <td class="text-end">
+
+                        <a
+                            href="{% url 'editar_usuario' usuario.id %}"
+                            class="btn btn-sm btn-outline-primary"
+                            title="Editar usuário">
+
+                            <i class="bi bi-pencil"></i>
+
+                        </a>
+
+                        <a
+                            href="{% url 'excluir_usuario' usuario.id %}"
+                            class="btn btn-sm btn-outline-danger"
+                            title="Excluir usuário">
+
+                            <i class="bi bi-trash"></i>
+
+                        </a>
+
+                    </td>
+
+
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="4" class="text-center py-5">
+
+                        <i class="bi bi-person-x fs-1 text-muted"></i>
+
+                        <p class="text-muted mt-3 mb-0">
+                            Nenhum usuário cadastrado.
+                        </p>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- ======================================== -->
+
+<!-- MODAL NOVO USUÁRIO -->
+
+<!-- ======================================== -->
+
+<div
+    class="modal fade"
+    id="modalNovoUsuario"
+    tabindex="-1"
+    aria-labelledby="modalNovoUsuarioLabel"
+    aria-hidden="true">
+
+
+<div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h5 class="modal-title fw-bold" id="modalNovoUsuarioLabel">
+
+                <i class="bi bi-person-plus-fill"></i>
+                Novo Usuário
+
+            </h5>
+
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar">
+            </button>
+
+        </div>
+
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="modal-body">
+
+                {% if form.non_field_errors %}
+
+                    <div class="alert alert-danger">
+
+                        {{ form.non_field_errors }}
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Usuário
+                    </label>
+
+                    {{ form.username }}
+
+                    {% if form.username.errors %}
+
+                        <div class="text-danger small mt-1">
+                            {{ form.username.errors }}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Senha
+                    </label>
+
+                    <div class="input-group">
+
+                        {{ form.password1 }}
+
+                        <button
+                            class="btn btn-outline-secondary"
+                            type="button"
+                            onclick="alternarSenha('id_password1', this)"
+                            title="Mostrar ou ocultar senha">
+
+                            <i class="bi bi-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                        {% if form.password1.errors %}
+
+                            <div class="text-danger small mt-1">
+                                {{ form.password1.errors }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                
+                    <div class="mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Confirmar senha
+                        </label>
+
+                        <div class="input-group">
+
+                            {{ form.password2 }}
+
+                            <button
+                                class="btn btn-outline-secondary"
+                                type="button"
+                                onclick="alternarSenha('id_password2', this)"
+                                title="Mostrar ou ocultar senha">
+
+                                <i class="bi bi-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                        <div id="mensagemSenhas" class="small mt-1"></div>
+
+                        {% if form.password2.errors %}
+
+                            <div class="text-danger small mt-1">
+                                {{ form.password2.errors }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Perfil
+                    </label>
+
+                    {{ form.perfil }}
+
+                    {% if form.perfil.errors %}
+
+                        <div class="text-danger small mt-1">
+                            {{ form.perfil.errors }}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    <i class="bi bi-x-circle"></i>
+                    Cancelar
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    <i class="bi bi-check-circle"></i>
+                    Cadastrar Usuário
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<script>
+    function alternarSenha(id, botao) {
+
+        const campo = document.getElementById(id);
+        const icone = botao.querySelector('i');
+
+        if (campo.type === 'password') {
+            campo.type = 'text';
+            icone.classList.remove('bi-eye');
+            icone.classList.add('bi-eye-slash');
+        } else {
+            campo.type = 'password';
+            icone.classList.remove('bi-eye-slash');
+            icone.classList.add('bi-eye');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const senha = document.getElementById('id_password1');
+        const confirmacao = document.getElementById('id_password2');
+        const mensagem = document.getElementById('mensagemSenhas');
+
+        function verificarSenhas() {
+
+            if (!senha.value && !confirmacao.value) {
+                mensagem.textContent = '';
+                return;
+            }
+
+            if (senha.value === confirmacao.value) {
+                mensagem.textContent = '✓ As senhas são iguais.';
+                mensagem.className = 'text-success small mt-1';
+            } else {
+                mensagem.textContent = '✗ As senhas não coincidem.';
+                mensagem.className = 'text-danger small mt-1';
+            }
+        }
+
+        senha.addEventListener('input', verificarSenhas);
+        confirmacao.addEventListener('input', verificarSenhas);
+
+    });
+</script>
+
+{% endblock %}

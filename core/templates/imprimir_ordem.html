@@ -1,0 +1,608 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>OS #{{ ordem.id }} - Sandoval TI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+            background: #e9edf2;
+            font-size: 11px;
+        }
+
+        /* DOCUMENTO */
+
+        .documento {
+            max-width: 850px;
+            min-height: 297mm;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            border-top: 5px solid #073179;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* CABEÇALHO */
+
+        .cabecalho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #073179;
+            gap: 15px;
+        }
+
+        .identidade {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-os {
+            width: 85px;
+            height: 75px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .marca {
+            color: #073179;
+            font-size: 25px;
+            font-weight: bold;
+            margin: 0 0 3px;
+        }
+
+        .subtitulo {
+            margin: 0;
+            font-size: 11px;
+            color: #555;
+        }
+
+        .contato {
+            margin-top: 5px;
+            font-size: 10px;
+            color: #555;
+        }
+
+        .numero-os {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .numero-os h2 {
+            margin: 0 0 5px;
+            color: #073179;
+            font-size: 16px;
+        }
+
+        /* SEÇÕES */
+
+        .secao {
+            margin-top: 12px;
+        }
+
+        .secao h3 {
+            margin: 0 0 7px;
+            padding: 6px 9px;
+            background: #edf2f8;
+            color: #073179;
+            border-left: 3px solid #073179;
+            font-size: 11px;
+        }
+
+        .linha {
+            margin: 4px 0;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
+        .campo {
+            font-weight: bold;
+        }
+
+        .grade {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 15px;
+        }
+
+        .texto-longo {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            line-height: 1.35;
+            min-height: 14px;
+        }
+
+        .valor {
+            font-size: 14px;
+            font-weight: bold;
+            color: #073179;
+        }
+
+        /* ASSINATURAS */
+
+        .assinaturas {
+            display: flex;
+            gap: 35px;
+            margin-top: 45px;
+            break-inside: avoid;
+        }
+
+        .assinatura {
+            flex: 1;
+            padding-top: 5px;
+            border-top: 1px solid #333;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .data-entrega {
+            margin-top: 18px;
+            text-align: right;
+            font-size: 10px;
+        }
+
+        /* RODAPÉ */
+
+        .rodape {
+            margin-top: auto;
+            padding-top: 7px;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            color: #555;
+            font-size: 9px;
+            flex-shrink: 0;
+        }
+
+        /* BOTÕES */
+
+        .acoes {
+            max-width: 850px;
+            margin: 0 auto 12px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .botao {
+            border: 0;
+            border-radius: 5px;
+            padding: 10px 15px;
+            color: white;
+            background: #073179;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .botao-voltar {
+            background: #555;
+        }
+
+        /* IMPRESSÃO A4 */
+
+        @media print {
+
+            @page {
+                size: A4 portrait;
+                margin: 7mm;
+            }
+
+            body {
+                padding: 0;
+                margin: 0;
+                background: white;
+                font-size: 9.5px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .documento {
+                width: 100%;
+                max-width: none;
+                min-height: 280mm;
+                margin: 0;
+                padding: 10px;
+                border-top: 3px solid #073179;
+                background: white;
+
+                display: flex;
+                flex-direction: column;
+            }
+
+            .acoes {
+                display: none !important;
+            }
+
+            /* CABEÇALHO */
+
+            .cabecalho {
+                margin-bottom: 8px;
+                break-inside: avoid;
+            }
+
+            .logo-os {
+                width: 75px;
+                height: 65px;
+            }
+
+            /* SEÇÕES */
+
+            .secao {
+                margin-top: 9px;
+            }
+
+            .secao:first-of-type {
+                margin-top: 18px;
+            }
+
+            .secao h3 {
+                padding: 4px 7px;
+                margin-bottom: 5px;
+                font-size: 10px;
+            }
+
+            .linha {
+                margin: 3px 0;
+                line-height: 1.25;
+            }
+
+            .texto-longo {
+                line-height: 1.25;
+            }
+
+            /* ASSINATURAS */
+
+            .assinaturas {
+                margin-top: 45px;
+                gap: 30px;
+                break-inside: avoid;
+            }
+
+            .assinatura {
+                padding-top: 6px;
+            }
+
+            .data-entrega {
+                margin-top: 18px;
+                break-inside: avoid;
+            }
+
+            /* RODAPÉ */
+
+            .rodape {
+                margin-top: auto;
+                padding-top: 7px;
+                border-top: 1px solid #ccc;
+                text-align: center;
+                color: #555;
+                font-size: 9px;
+                flex-shrink: 0;
+            }
+
+            /* EVITAR QUEBRAS INDESEJADAS */
+
+            .cabecalho,
+            .assinaturas,
+            .data-entrega {
+                break-inside: avoid;
+            }
+        }
+
+        /* RESPONSIVIDADE */
+
+        @media screen and (max-width: 600px) {
+
+            body {
+                padding: 8px;
+            }
+
+            .documento {
+                padding: 15px;
+            }
+
+            .cabecalho {
+                gap: 10px;
+            }
+
+            .identidade {
+                gap: 8px;
+            }
+
+            .logo-os {
+                width: 60px;
+                height: 55px;
+            }
+
+            .marca {
+                font-size: 19px;
+            }
+
+            .numero-os h2 {
+                font-size: 12px;
+            }
+
+            .grade {
+                grid-template-columns: 1fr;
+            }
+
+            .assinaturas {
+                gap: 30px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="acoes">
+
+        <button class="botao" onclick="window.print()">
+            Imprimir / Salvar PDF
+        </button>
+
+        <button
+            class="botao botao-voltar"
+            onclick="window.location.href='{% url 'ordens' %}'">
+            Voltar para Ordens
+        </button>
+
+    </div>
+
+    <main class="documento">
+
+        <!-- CABEÇALHO -->
+
+        <header class="cabecalho">
+
+            <div class="identidade">
+
+                <img
+                    src="{% static 'img/logo-sandoval-ti.png' %}"
+                    alt="Logo Sandoval TI"
+                    class="logo-os"
+                >
+
+                <div>
+
+                    <h1 class="marca">SANDOVAL TI</h1>
+
+                    <p class="subtitulo">
+                        Serviços técnicos em informática
+                    </p>
+
+                    <p class="contato">
+                        WhatsApp: (92) 99158-3740
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="numero-os">
+
+                <h2>ORDEM DE SERVIÇO</h2>
+
+                <div><strong>Nº:</strong> {{ ordem.id }}</div>
+
+                <div>
+                    <strong>Data:</strong>
+                    {{ ordem.criado_em|date:"d/m/Y H:i" }}
+                </div>
+
+                <div>
+                    <strong>Status:</strong>
+                    {{ ordem.get_status_display }}
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- CLIENTE -->
+
+        <section class="secao">
+
+            <h3>1. DADOS DO CLIENTE</h3>
+
+            <div class="linha">
+                <strong>Nome:</strong>
+                {{ ordem.cliente.nome }}
+            </div>
+
+            <div class="grade">
+
+                <div class="linha">
+                    <strong>Telefone:</strong>
+                    {{ ordem.cliente.telefone }}
+                </div>
+
+                <div class="linha">
+                    <strong>E-mail:</strong>
+                    {{ ordem.cliente.email|default:"Não informado" }}
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- EQUIPAMENTO -->
+
+        <section class="secao">
+
+            <h3>2. IDENTIFICAÇÃO DO EQUIPAMENTO</h3>
+
+            <div class="grade">
+
+                <div class="linha">
+                    <strong>Equipamento:</strong>
+                    {{ ordem.get_equipamento_display }}
+                </div>
+
+                <div class="linha">
+                    <strong>Marca:</strong>
+                    {{ ordem.marca|default:"Não informado" }}
+                </div>
+
+                <div class="linha">
+                    <strong>Modelo:</strong>
+                    {{ ordem.modelo|default:"Não informado" }}
+                </div>
+
+                <div class="linha">
+                    <strong>Nº de série:</strong>
+                    {{ ordem.numero_serie|default:"Não informado" }}
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ACESSÓRIOS -->
+
+        <section class="secao">
+
+            <h3>3. ACESSÓRIOS RECEBIDOS</h3>
+
+            <div class="texto-longo">
+                {{ ordem.acessorios|default:"Nenhum acessório informado." }}
+            </div>
+
+        </section>
+
+        <!-- ESTADO FÍSICO -->
+
+        <section class="secao">
+
+            <h3>4. ESTADO FÍSICO DO EQUIPAMENTO</h3>
+
+            <div class="texto-longo">
+                {{ ordem.estado_fisico|default:"Não informado." }}
+            </div>
+
+        </section>
+
+        <!-- PROBLEMA -->
+
+        <section class="secao">
+
+            <h3>5. PROBLEMA RELATADO PELO CLIENTE</h3>
+
+            <div class="texto-longo">
+                {{ ordem.problema|default:"Não informado." }}
+            </div>
+
+        </section>
+
+        <!-- DIAGNÓSTICO -->
+
+        <section class="secao">
+
+            <h3>6. DIAGNÓSTICO TÉCNICO</h3>
+
+            <div class="texto-longo">
+                {{ ordem.diagnostico|default:"Não informado." }}
+            </div>
+
+        </section>
+
+        <!-- SERVIÇO -->
+
+        <section class="secao">
+
+            <h3>7. SERVIÇO REALIZADO</h3>
+
+            <div class="texto-longo">
+                {{ ordem.servico_realizado|default:"Não informado." }}
+            </div>
+
+        </section>
+
+        <!-- VALOR -->
+
+        <section class="secao">
+
+            <h3>8. SITUAÇÃO E VALOR</h3>
+
+            <div class="grade">
+
+                <div class="linha">
+                    <strong>Status:</strong>
+                    {{ ordem.get_status_display }}
+                </div>
+
+                <div class="linha valor">
+
+                    {% if ordem.valor != None %}
+                        R$ {{ ordem.valor|floatformat:2 }}
+                    {% else %}
+                        Valor a definir
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- OBSERVAÇÕES -->
+
+        <section class="secao">
+
+            <h3>9. OBSERVAÇÕES</h3>
+
+            <div class="texto-longo">
+                {{ ordem.observacoes|default:"Nenhuma observação adicional." }}
+            </div>
+
+        </section>
+
+        <!-- ASSINATURAS -->
+
+        <div class="assinaturas">
+
+            <div class="assinatura">
+                Assinatura do cliente
+            </div>
+
+            <div class="assinatura">
+                Responsável técnico
+            </div>
+
+        </div>
+
+        <div class="data-entrega">
+            Data da entrega: ____/____/________
+        </div>
+
+        <!-- RODAPÉ -->
+
+        <footer class="rodape">
+
+            Sandoval TI — Serviços técnicos em informática
+
+            <br>
+
+            Documento de Ordem de Serviço
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,328 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Clientes - Sandoval TI
+{% endblock %}
+
+{% block content %}
+
+<!-- CABEÇALHO -->
+
+<div class="page-header mb-4 d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
+
+    <div>
+
+        <h2 class="page-title">
+            <i class="bi bi-people-fill"></i>
+            Clientes
+        </h2>
+
+        <p class="page-subtitle">
+            Gerencie os clientes cadastrados na Sandoval TI.
+        </p>
+
+    </div>
+
+    <div>
+
+        <button
+            type="button"
+            class="btn btn-primary sandoval-btn"
+            data-bs-toggle="collapse"
+            data-bs-target="#formCliente"
+            aria-expanded="false"
+            aria-controls="formCliente"
+        >
+            <i class="bi bi-person-plus-fill"></i>
+            Novo Cliente
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- FORMULÁRIO DE CLIENTE -->
+
+<div class="collapse mb-4" id="formCliente">
+
+    <div class="card sandoval-card">
+
+        <div class="card-header sandoval-card-header">
+            <i class="bi bi-person-plus-fill"></i>
+            Cadastrar Novo Cliente
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="row">
+
+                    {% for field in form %}
+
+                        <div class="col-md-6 mb-3">
+
+                            <label
+                                for="{{ field.id_for_label }}"
+                                class="form-label fw-semibold"
+                            >
+                                {{ field.label }}
+                            </label>
+
+                            {{ field }}
+
+                            {% if field.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ field.errors }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <div class="d-flex gap-2 mt-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-success"
+                    >
+                        <i class="bi bi-check-circle-fill"></i>
+                        Salvar Cliente
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#formCliente"
+                    >
+                        <i class="bi bi-x-circle"></i>
+                        Cancelar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- LISTA DE CLIENTES -->
+
+<div class="card sandoval-card">
+
+    <div class="card-header sandoval-card-header">
+        <i class="bi bi-list-check"></i>
+        Clientes Cadastrados
+    </div>
+
+    <div class="card-body">
+
+        <!-- PESQUISA DE CLIENTES -->
+
+        <form
+            method="GET"
+            action="{% url 'clientes' %}"
+            class="mb-3"
+        >
+
+            <div class="d-flex gap-2">
+
+                <input
+                    type="text"
+                    name="busca"
+                    class="form-control"
+                    placeholder="Pesquisar por nome, telefone ou e-mail..."
+                    value="{{ busca }}"
+                >
+
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center px-3"
+                >
+                    <i class="bi bi-search me-1"></i>
+                    Pesquisar
+                </button>
+
+                {% if busca %}
+
+                    <a
+                        href="{% url 'clientes' %}"
+                        class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center justify-content-center"
+                        style="width: 42px; height: 46px; padding: 0;"
+                        title="Limpar pesquisa"
+                    >
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </form>
+
+
+        {% if busca %}
+
+            <p class="text-muted small mb-3">
+                Resultado da pesquisa por:
+                <strong>{{ busca }}</strong>
+            </p>
+
+        {% endif %}
+
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+
+                        <th class="text-center">
+                            Ações
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for cliente in clientes %}
+
+                        <tr>
+
+                            <!-- NOME -->
+
+                            <td>
+
+                                <i class="bi bi-person-circle text-primary"></i>
+
+                                <span class="fw-semibold">
+                                    {{ cliente.nome }}
+                                </span>
+
+                            </td>
+
+
+                            <!-- TELEFONE -->
+
+                            <td>
+
+                                <i class="bi bi-telephone text-muted"></i>
+                                {{ cliente.telefone }}
+
+                            </td>
+
+
+                            <!-- EMAIL -->
+
+                            <td>
+
+                                {% if cliente.email %}
+
+                                    <i class="bi bi-envelope text-muted"></i>
+                                    {{ cliente.email }}
+
+                                {% else %}
+
+                                    <span class="text-muted">
+                                        Não informado
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- AÇÕES -->
+
+                            <td class="text-center">
+
+                                <div class="d-flex justify-content-center gap-1">
+
+                                    <a
+                                        href="{% url 'editar_cliente' cliente.id %}"
+                                        class="btn btn-warning btn-sm"
+                                        title="Editar cliente"
+                                    >
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+
+                                    {% if user.is_superuser %}
+
+                                        <a
+                                            href="{% url 'excluir_cliente' cliente.id %}"
+                                            class="btn btn-danger btn-sm"
+                                            title="Excluir cliente"
+                                            onclick="return confirm('Tem certeza que deseja excluir este cliente?')"
+                                        >
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+
+                            <td colspan="4" class="text-center py-4">
+
+                                <i class="bi bi-people fs-2 text-muted"></i>
+
+                                {% if busca %}
+
+                                    <p class="text-muted mb-0 mt-2">
+                                        Nenhum cliente encontrado para essa pesquisa.
+                                    </p>
+
+                                {% else %}
+
+                                    <p class="text-muted mb-0 mt-2">
+                                        Nenhum cliente cadastrado ainda.
+                                    </p>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

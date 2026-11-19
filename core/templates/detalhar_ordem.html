@@ -1,0 +1,669 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ordem de Serviço #{{ ordem.id }} - Sandoval TI
+{% endblock %}
+
+{% block content %}
+
+<!-- CABEÇALHO -->
+
+<div class="page-header mb-4 d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
+
+    <div>
+
+        <h2 class="page-title">
+
+            <i class="bi bi-clipboard-check"></i>
+
+            Ordem de Serviço #{{ ordem.id }}
+
+        </h2>
+
+        <p class="page-subtitle">
+
+            Detalhes completos do atendimento técnico.
+
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <a
+            href="{% url 'ordens' %}"
+            class="btn btn-secondary"
+        >
+
+            <i class="bi bi-arrow-left"></i>
+
+            Voltar
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- CLIENTE E EQUIPAMENTO -->
+
+<div class="row g-4 mb-4">
+
+    <!-- CLIENTE -->
+
+    <div class="col-md-6">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-person-circle"></i>
+
+                Dados do Cliente
+
+            </div>
+
+
+            <div class="card-body">
+
+                <p class="mb-3">
+
+                    <strong>Nome:</strong>
+
+                    <br>
+
+                    <i class="bi bi-person text-primary"></i>
+
+                    {{ ordem.cliente.nome }}
+
+                </p>
+
+
+                <p class="mb-3">
+
+                    <strong>Telefone:</strong>
+
+                    <br>
+
+                    <i class="bi bi-telephone text-primary"></i>
+
+                    {{ ordem.cliente.telefone }}
+
+                </p>
+
+
+                <p class="mb-0">
+
+                    <strong>E-mail:</strong>
+
+                    <br>
+
+                    {% if ordem.cliente.email %}
+
+                        <i class="bi bi-envelope text-primary"></i>
+
+                        {{ ordem.cliente.email }}
+
+                    {% else %}
+
+                        <span class="text-muted">
+
+                            Não informado
+
+                        </span>
+
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- EQUIPAMENTO -->
+
+    <div class="col-md-6">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-laptop"></i>
+
+                Equipamento
+
+            </div>
+
+
+            <div class="card-body">
+
+                <p class="mb-3">
+
+                    <strong>Tipo:</strong>
+
+                    <br>
+
+                    <i class="bi bi-pc-display text-primary"></i>
+
+                    {{ ordem.equipamento }}
+
+                </p>
+
+
+                <p class="mb-3">
+
+                    <strong>Marca:</strong>
+
+                    <br>
+
+                    {% if ordem.marca %}
+
+                        {{ ordem.marca }}
+
+                    {% else %}
+
+                        <span class="text-muted">
+
+                            Não informado
+
+                        </span>
+
+                    {% endif %}
+
+                </p>
+
+
+                <p class="mb-0">
+
+                    <strong>Modelo:</strong>
+
+                    <br>
+
+                    {% if ordem.modelo %}
+
+                        {{ ordem.modelo }}
+
+                    {% else %}
+
+                        <span class="text-muted">
+
+                            Não informado
+
+                        </span>
+
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ACESSÓRIOS E ESTADO FÍSICO -->
+
+<div class="row g-4 mb-4">
+
+    <!-- ACESSÓRIOS RECEBIDOS -->
+
+    <div class="col-md-6">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-plug"></i>
+
+                Acessórios Recebidos
+
+            </div>
+
+            <div class="card-body">
+
+                {% if ordem.acessorios %}
+
+                    <p class="mb-0">
+                        {{ ordem.acessorios|linebreaksbr }}
+                    </p>
+
+                {% else %}
+
+                    <p class="text-muted mb-0">
+                        Nenhum acessório informado.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ESTADO FÍSICO -->
+
+    <div class="col-md-6">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-laptop"></i>
+
+                Estado Físico do Equipamento
+
+            </div>
+
+            <div class="card-body">
+
+                {% if ordem.estado_fisico %}
+
+                    <p class="mb-0">
+                        {{ ordem.estado_fisico|linebreaksbr }}
+                    </p>
+
+                {% else %}
+
+                    <p class="text-muted mb-0">
+                        Estado físico não informado.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROBLEMA E DIAGNÓSTICO -->
+
+<div class="row g-4 mb-4">
+
+    <!-- PROBLEMA -->
+
+    <div class="col-md-6">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-exclamation-triangle"></i>
+
+                Problema Informado
+
+            </div>
+
+
+            <div class="card-body">
+
+                {% if ordem.problema %}
+
+                    <p class="mb-0">
+
+                        {{ ordem.problema|linebreaksbr }}
+
+                    </p>
+
+                {% else %}
+
+                    <p class="text-muted mb-0">
+
+                        Nenhum problema informado.
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DIAGNÓSTICO -->
+
+    <div class="col-md-6">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-search"></i>
+
+                Diagnóstico Técnico
+
+            </div>
+
+
+            <div class="card-body">
+
+                {% if ordem.diagnostico %}
+
+                    <p class="mb-0">
+
+                        {{ ordem.diagnostico|linebreaksbr }}
+
+                    </p>
+
+                {% else %}
+
+                    <p class="text-muted mb-0">
+
+                        Diagnóstico ainda não informado.
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SERVIÇO E VALOR -->
+
+<div class="row g-4 mb-4">
+
+    <!-- SERVIÇO -->
+
+    <div class="col-md-8">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-tools"></i>
+
+                Serviço Realizado
+
+            </div>
+
+
+            <div class="card-body">
+
+                {% if ordem.servico_realizado %}
+
+                    <p class="mb-0">
+
+                        {{ ordem.servico_realizado|linebreaksbr }}
+
+                    </p>
+
+                {% else %}
+
+                    <p class="text-muted mb-0">
+
+                        Nenhum serviço registrado.
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- VALOR -->
+
+    <div class="col-md-4">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-cash-coin"></i>
+
+                Valor
+
+            </div>
+
+
+            <div class="card-body d-flex align-items-center">
+
+                {% if ordem.valor %}
+
+                    <div>
+
+                        <small class="text-muted d-block">
+
+                            Valor do serviço
+
+                        </small>
+
+                        <h3 class="text-success fw-bold mb-0">
+
+                            R$ {{ ordem.valor }}
+
+                        </h3>
+
+                    </div>
+
+                {% else %}
+
+                    <span class="text-muted">
+
+                        Valor não informado
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- STATUS E DATA -->
+
+<div class="row g-4 mb-4">
+
+    <!-- STATUS -->
+
+    <div class="col-md-6">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-activity"></i>
+
+                Status da Ordem
+
+            </div>
+
+
+            <div class="card-body d-flex align-items-center">
+
+                {% if ordem.status == 'aberta' %}
+
+                    <span class="badge bg-danger fs-6">
+
+                        <i class="bi bi-exclamation-circle"></i>
+
+                        Aberta
+
+                    </span>
+
+                {% elif ordem.status == 'andamento' %}
+
+                    <span class="badge bg-warning text-dark fs-6">
+
+                        <i class="bi bi-hourglass-split"></i>
+
+                        Em andamento
+
+                    </span>
+
+                {% elif ordem.status == 'fechada' %}
+
+                    <span class="badge bg-success fs-6">
+
+                        <i class="bi bi-check-circle"></i>
+
+                        Finalizada
+
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-secondary fs-6">
+
+                        {{ ordem.get_status_display }}
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DATA -->
+
+    <div class="col-md-6">
+
+        <div class="card sandoval-card h-100">
+
+            <div class="card-header sandoval-card-header">
+
+                <i class="bi bi-calendar-event"></i>
+
+                Data de Entrada
+
+            </div>
+
+
+            <div class="card-body d-flex align-items-center">
+
+                <p class="mb-0">
+
+                    <i class="bi bi-clock text-primary"></i>
+
+                    {{ ordem.criado_em|date:"d/m/Y H:i" }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- OBSERVAÇÕES -->
+
+<div class="card sandoval-card mb-4">
+
+    <div class="card-header sandoval-card-header">
+
+        <i class="bi bi-chat-left-text"></i>
+
+        Observações
+
+    </div>
+
+
+    <div class="card-body">
+
+        {% if ordem.observacoes %}
+
+            <p class="mb-0">
+
+                {{ ordem.observacoes|linebreaksbr }}
+
+            </p>
+
+        {% else %}
+
+            <p class="text-muted mb-0">
+
+                Nenhuma observação registrada.
+
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<!-- AÇÕES -->
+
+<div class="d-flex flex-wrap gap-2 mb-4">
+
+    <a href="{% url 'imprimir_ordem' ordem.id %}"
+        class="btn btn-primary"
+        target="_blank">
+        <i class="bi bi-printer"></i>
+        Imprimir Ordem de Serviço
+    </a>
+
+    <a
+        href="{% url 'editar_ordem' ordem.id %}"
+        class="btn btn-warning"
+    >
+
+        <i class="bi bi-pencil-square"></i>
+
+        Editar Ordem
+
+    </a>
+
+
+    <a
+        href="{% url 'excluir_ordem' ordem.id %}"
+        class="btn btn-danger"
+    >
+
+        <i class="bi bi-trash"></i>
+
+        Excluir Ordem
+
+    </a>
+
+
+    <a
+        href="{% url 'ordens' %}"
+        class="btn btn-secondary"
+    >
+
+        <i class="bi bi-arrow-left"></i>
+
+        Voltar para Ordens
+
+    </a>
+
+</div>
+
+{% endblock %}

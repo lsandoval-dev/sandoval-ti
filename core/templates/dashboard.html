@@ -1,0 +1,517 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard - Sandoval TI
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h2 class="page-title mb-1">
+            <i class="bi bi-speedometer2"></i>
+            Dashboard
+        </h2>
+
+        <small class="text-muted">
+            Painel administrativo Sandoval TI
+        </small>
+    </div>
+
+
+    <div>
+
+    <a href="{% url 'clientes' %}"
+       class="btn btn-primary btn-sm shadow-sm">
+
+        <i class="bi bi-person-plus-fill me-1"></i>
+        Cliente
+
+    </a>
+
+
+    <a href="{% url 'ordens' %}"
+       class="btn btn-success btn-sm shadow-sm">
+
+        <i class="bi bi-tools me-1"></i>
+        Ordem
+
+    </a>
+
+</div>
+
+</div>
+
+
+
+
+<!-- =======================
+     CARDS PRINCIPAIS
+======================== -->
+
+<div class="row g-4 mb-4">
+
+    <!-- Clientes -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card dashboard-card dashboard-clientes">
+            <div class="card-body">
+
+                <div class="dashboard-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+
+                <h6 class="dashboard-title">
+                    Clientes
+                </h6>
+
+                <h2 class="dashboard-number">
+                    {{ total_clientes }}
+                </h2>
+
+                <small class="dashboard-text">
+                    Total cadastrados
+                </small>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Ordens Abertas -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card dashboard-card dashboard-abertas">
+            <div class="card-body">
+
+                <div class="dashboard-icon">
+                    <i class="bi bi-tools"></i>
+                </div>
+
+                <h6 class="dashboard-title">
+                    Ordens Abertas
+                </h6>
+
+                <h2 class="dashboard-number text-danger">
+                    {{ ordens_abertas }}
+                </h2>
+
+                <small class="dashboard-text">
+                    Aguardando atendimento
+                </small>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Em andamento -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card dashboard-card dashboard-andamento">
+            <div class="card-body">
+
+                <div class="dashboard-icon">
+                    <i class="bi bi-cpu-fill"></i>
+                </div>
+
+                <h6 class="dashboard-title">
+                    Em andamento
+                </h6>
+
+                <h2 class="dashboard-number text-warning">
+                    {{ ordens_andamento }}
+                </h2>
+
+                <small class="dashboard-text">
+                    Em manutenção
+                </small>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Finalizadas -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card dashboard-card dashboard-finalizadas">
+            <div class="card-body">
+
+                <div class="dashboard-icon">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+
+                <h6 class="dashboard-title">
+                    Finalizadas
+                </h6>
+
+                <h2 class="dashboard-number text-success">
+                    {{ ordens_fechadas }}
+                </h2>
+
+                <small class="dashboard-text">
+                    Serviços concluídos
+                </small>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- =======================
+     GRÁFICO DE ORDENS
+======================== -->
+
+<div class="row mt-4">
+
+
+    <div class="col-md-6 mx-auto">
+
+
+        <div class="dashboard-list-card">
+
+
+            <div class="dashboard-list-header">
+
+                <div>
+                    <i class="bi bi-pie-chart-fill"></i>
+                    Status das Ordens
+                </div>
+
+            </div>
+
+
+
+            <div class="dashboard-chart">
+
+                <canvas id="graficoOrdens"></canvas>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- LISTAS -->
+
+<div class="row mt-4 g-4">
+
+
+    <!-- CLIENTES -->
+
+    <div class="col-md-6">
+
+
+        <div class="dashboard-list-card">
+
+
+            <div class="dashboard-list-header">
+
+                <div>
+                    <i class="bi bi-people-fill"></i>
+                    Últimos Clientes
+                </div>
+
+                <a href="{% url 'clientes' %}">
+                    Ver todos
+                </a>
+
+            </div>
+
+
+
+            <div class="dashboard-list-body">
+
+
+                {% for cliente in ultimos_clientes %}
+
+
+                <div class="dashboard-item">
+
+                    <div class="dashboard-item-icon">
+
+                        <i class="bi bi-person"></i>
+
+                    </div>
+
+
+                    <span>
+                        {{ cliente.nome }}
+                    </span>
+
+
+                </div>
+
+
+                {% empty %}
+
+
+                <p class="text-muted text-center mb-0">
+
+                    Nenhum cliente cadastrado
+
+                </p>
+
+
+                {% endfor %}
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- ORDENS -->
+
+
+    <div class="col-md-6">
+
+
+        <div class="dashboard-list-card">
+
+
+            <div class="dashboard-list-header">
+
+
+                <div>
+
+                    <i class="bi bi-tools"></i>
+
+                    Últimas Ordens
+
+                </div>
+
+
+                <a href="{% url 'ordens' %}">
+                    Ver todas
+                </a>
+
+
+            </div>
+
+
+
+
+            <div class="dashboard-list-body">
+
+
+
+                {% for ordem in ultimas_ordens %}
+
+
+
+                <div class="dashboard-item">
+
+
+                    <div class="dashboard-item-icon">
+
+                        <i class="bi bi-clipboard-check"></i>
+
+                    </div>
+
+
+
+                    <span class="fw-bold">
+
+                        OS-{{ ordem.id|stringformat:"03d" }}
+
+                    </span>
+
+
+
+                    {% if ordem.status == "aberta" %}
+
+                        <span class="badge bg-danger ms-auto">
+                            <i class="bi bi-exclamation-circle me-1"></i>
+                            Aberta
+                        </span>
+
+
+                        {% elif ordem.status == "andamento" %}
+
+                            <span class="badge bg-warning text-dark ms-auto">
+                                <i class="bi bi-hourglass-split me-1"></i>
+                                Em andamento
+                            </span>
+
+
+                        {% elif ordem.status == "fechada" %}
+
+                            <span class="badge bg-success ms-auto">
+                                <i class="bi bi-check-circle me-1"></i>
+                                Finalizada
+                            </span>
+
+
+                        {% else %}
+
+                            <span class="badge bg-secondary ms-auto">
+                                {{ ordem.get_status_display }}
+                            </span>
+
+                    {% endif %}
+
+
+
+                </div>
+
+
+
+
+                {% empty %}
+
+
+
+                <p class="text-muted text-center mb-0">
+
+                    Nenhuma ordem cadastrada
+
+                </p>
+
+
+
+                {% endfor %}
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+const ctx = document.getElementById('graficoOrdens');
+
+const totalOrdens = {{ total_ordens }};
+
+Chart.register({
+
+    id: 'textoCentro',
+
+    beforeDraw(chart) {
+
+        const {ctx, chartArea} = chart;
+
+        ctx.save();
+
+
+        const x = (chartArea.left + chartArea.right) / 2;
+
+        const y = (chartArea.top + chartArea.bottom) / 2;
+
+
+        ctx.textAlign = 'center';
+
+        ctx.textBaseline = 'middle';
+
+
+        ctx.font = 'bold 32px Segoe UI';
+
+        ctx.fillStyle = '#073179';
+
+        ctx.fillText(totalOrdens, x, y - 10);
+
+
+
+        ctx.font = '14px Segoe UI';
+
+        ctx.fillStyle = '#6c757d';
+
+        ctx.fillText('Ordens', x, y + 20);
+
+
+        ctx.restore();
+
+    }
+
+});
+
+
+new Chart(ctx, {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: [
+            'Abertas',
+            'Em andamento',
+            'Finalizadas'
+        ],
+
+
+        datasets: [{
+
+            data: {{ grafico_status|safe }},
+
+            backgroundColor: [
+                '#dc3545',
+                '#ffc107',
+                '#198754'
+            ],
+
+            borderWidth: 2
+
+        }]
+
+    },
+
+
+    options: {
+
+        responsive: true,
+
+       plugins: {
+
+            legend: {
+
+                position: 'bottom'
+
+            },
+
+
+            tooltip: {
+
+                enabled: true
+
+            }
+
+        }
+
+    }
+
+});
+
+
+</script>
+
+
+
+{% endblock %}

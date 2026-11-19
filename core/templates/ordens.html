@@ -1,0 +1,395 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Ordens de Serviço - Sandoval TI
+{% endblock %}
+
+{% block content %}
+
+<!-- CABEÇALHO DA PÁGINA -->
+
+<div class="page-header mb-4 d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
+
+    <div>
+
+        <h2 class="page-title">
+            <i class="bi bi-clipboard-data"></i>
+            Ordens de Serviço
+        </h2>
+
+        <p class="page-subtitle">
+            Gerencie todos os atendimentos realizados pela Sandoval TI.
+        </p>
+
+    </div>
+
+    <div>
+
+        <a href="{% url 'nova_ordem' %}"
+           class="btn btn-primary sandoval-btn">
+
+            <i class="bi bi-plus-circle"></i>
+            Nova Ordem de Serviço
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- PESQUISA DE ORDENS -->
+
+<div class="card sandoval-card mb-4">
+
+    <div class="card-body">
+
+        <form method="GET" action="{% url 'ordens' %}">
+
+            <div class="row g-2 align-items-center">
+
+                <div class="col-md-9">
+
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+                            <i class="bi bi-search"></i>
+                        </span>
+
+                        <input
+                            type="text"
+                            name="busca"
+                            class="form-control"
+                            placeholder="Pesquisar por número, cliente, equipamento, marca ou modelo..."
+                            value="{{ busca }}"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 d-flex gap-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary sandoval-btn flex-grow-1"
+                    >
+
+                        <i class="bi bi-search"></i>
+                        Pesquisar
+
+                    </button>
+
+                    <a
+                        href="{% url 'ordens' %}"
+                        class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center justify-content-center"
+                        style="width: 42px; height: 46px; padding: 0;"
+                        title="Limpar pesquisa"
+                    >
+
+                        <i class="bi bi-x-lg"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- LISTA DE ORDENS DE SERVIÇO -->
+
+<div class="card sandoval-card">
+
+    <div class="card-header sandoval-card-header">
+
+        <i class="bi bi-list-check"></i>
+
+        Ordens de Serviço Cadastradas
+
+        {% if busca %}
+
+            <span class="ms-2 small">
+                | Resultado da pesquisa: "{{ busca }}"
+            </span>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="card-body p-0">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <!-- CABEÇALHO DA TABELA -->
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Equipamento</th>
+                        <th>Problema</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Data</th>
+
+                        <th class="text-center">
+                            Ações
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <!-- CONTEÚDO DA TABELA -->
+
+                <tbody>
+
+                    {% for os in ordens %}
+
+                        <tr>
+
+                            <!-- ID DA OS -->
+
+                            <td>
+
+                                <span class="fw-semibold">
+                                    #{{ os.id }}
+                                </span>
+
+                            </td>
+
+
+                            <!-- CLIENTE -->
+
+                            <td>
+
+                                <i class="bi bi-person-circle text-primary"></i>
+
+                                {{ os.cliente.nome }}
+
+                            </td>
+
+
+                            <!-- EQUIPAMENTO -->
+
+                            <td>
+
+                                <div class="fw-semibold">
+
+                                    <i class="bi bi-laptop"></i>
+
+                                    {{ os.equipamento }}
+
+                                </div>
+
+                                <small class="text-muted">
+                                    {{ os.marca }} {{ os.modelo }}
+                                </small>
+
+                            </td>
+
+
+                            <!-- PROBLEMA -->
+
+                            <td>
+
+                                {{ os.problema|truncatechars:40 }}
+
+                            </td>
+
+
+                            <!-- VALOR -->
+
+                            <td>
+
+                                {% if os.valor %}
+
+                                    <span class="fw-semibold">
+                                        R$ {{ os.valor }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="text-muted">
+                                        -
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                {% if os.status == 'aberta' %}
+
+                                    <span class="badge bg-danger">
+
+                                        <i class="bi bi-exclamation-circle"></i>
+                                        Aberta
+
+                                    </span>
+
+                                {% elif os.status == 'andamento' %}
+
+                                    <span class="badge bg-warning text-dark">
+
+                                        <i class="bi bi-hourglass-split"></i>
+                                        Em andamento
+
+                                    </span>
+
+                                {% elif os.status == 'fechada' %}
+
+                                    <span class="badge bg-success">
+
+                                        <i class="bi bi-check-circle"></i>
+                                        Finalizada
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+                                        {{ os.get_status_display }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- DATA -->
+
+                            <td>
+
+                                <small>
+                                    {{ os.criado_em|date:"d/m/Y" }}
+                                </small>
+
+                            </td>
+
+
+                            <!-- AÇÕES -->
+
+                            <td class="text-center">
+
+                                <div class="d-flex justify-content-center gap-1">
+
+                                    <!-- VISUALIZAR -->
+
+                                    <a
+                                        href="{% url 'detalhar_ordem' os.id %}"
+                                        class="btn btn-primary btn-sm"
+                                        title="Visualizar ordem"
+                                    >
+
+                                        <i class="bi bi-eye"></i>
+
+                                    </a>
+
+
+                                    <!-- EDITAR -->
+
+                                    <a
+                                        href="{% url 'editar_ordem' os.id %}"
+                                        class="btn btn-warning btn-sm"
+                                        title="Editar ordem"
+                                    >
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                    </a>
+
+
+                                    <!-- EXCLUIR - SOMENTE ADMINISTRADOR -->
+
+                                    {% if user.is_superuser or user.groups.all.0.name == 'Administrador' %}
+
+                                        <a
+                                            href="{% url 'excluir_ordem' os.id %}"
+                                            class="btn btn-danger btn-sm"
+                                            title="Excluir ordem"
+                                        >
+
+                                            <i class="bi bi-trash"></i>
+
+                                        </a>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                    {% empty %}
+
+                        <!-- NENHUMA OS ENCONTRADA -->
+
+                        <tr>
+
+                            <td colspan="8" class="text-center py-4">
+
+                                {% if busca %}
+
+                                    <i class="bi bi-search fs-2 text-muted"></i>
+
+                                    <p class="text-muted mb-0 mt-2">
+                                        Nenhuma ordem encontrada para "{{ busca }}".
+                                    </p>
+
+                                    <a
+                                        href="{% url 'ordens' %}"
+                                        class="btn btn-outline-primary btn-sm mt-3"
+                                    >
+
+                                        <i class="bi bi-arrow-counterclockwise"></i>
+                                        Limpar pesquisa
+
+                                    </a>
+
+                                {% else %}
+
+                                    <i class="bi bi-clipboard-x fs-2 text-muted"></i>
+
+                                    <p class="text-muted mb-0 mt-2">
+                                        Nenhuma ordem de serviço cadastrada.
+                                    </p>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
