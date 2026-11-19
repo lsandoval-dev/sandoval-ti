@@ -32,7 +32,7 @@ O projeto tem como objetivo organizar o atendimento, acompanhar serviços e faci
 
 ## Requisitos
 
-- Python 3.12 ou superior, compatível com a versão do Django utilizada.
+- Python 3.13 ou superior.
 - Git.
 
 ## Instalação
@@ -67,4 +67,51 @@ Instale as dependências:
 pip install -r requirements.txt
 ```
 
-## Config
+## Configuração
+
+Crie o arquivo `.env` na pasta principal do projeto.
+
+Gere uma chave secreta e salve no arquivo usando o PowerShell:
+
+```powershell
+$key = python -c "import secrets; print(secrets.token_urlsafe(50))"
+Set-Content -Path .env -Value "DJANGO_SECRET_KEY=$key" -Encoding ascii
+```
+
+## Banco de dados
+
+Execute as migrações:
+
+```bash
+python manage.py migrate
+```
+
+Crie o primeiro usuário administrador:
+
+```bash
+python manage.py createsuperuser
+```
+
+## Executando o projeto
+
+Inicie o servidor local:
+
+```bash
+python manage.py runserver
+```
+
+Acesse no navegador:
+
+http://127.0.0.1:8000/
+
+## Observações
+
+Este projeto foi desenvolvido para fins de aprendizado, prática e portfólio profissional.
+
+A versão disponibilizada utiliza SQLite e está preparada para execução local. Não representa uma implantação em ambiente de produção.
+
+## Autor
+
+**Ladislau Sandoval**
+
+Desenvolvimento com Python e Django.
