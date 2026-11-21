@@ -1,0 +1,292 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sandoval TI | Serviços Técnicos em Informática</title>
+    <meta name="description" content="A Sandoval TI oferece serviços técnicos em informática, manutenção, formatação, otimização e configuração de notebooks e computadores.">
+
+    <link rel="stylesheet" href="{% static 'institucional/style.css' %}">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho">
+        <div class="container cabecalho-conteudo">
+
+            <a href="/" class="logo">
+                SANDOVAL <span>TI</span>
+            </a>
+
+            <nav class="menu" aria-label="Menu principal">
+                <a href="#inicio">Início</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato">Contato</a>
+            </nav>
+
+            <a href="https://wa.me/92991583740"
+               class="botao-contato"
+               target="_blank"
+               rel="noopener noreferrer">
+                Fale conosco
+            </a>
+
+        </div>
+    </header>
+
+
+    <!-- APRESENTAÇÃO PRINCIPAL -->
+    <main>
+
+        <section class="hero" id="inicio">
+            <div class="container">
+
+                <div class="hero-conteudo">
+
+                    <span class="hero-destaque">
+                        Tecnologia e soluções em informática
+                    </span>
+
+                    <h1>
+                        Seu equipamento merece
+                        <span>o melhor cuidado.</span>
+                    </h1>
+
+                    <p>
+                        Serviços técnicos em informática com atenção,
+                        qualidade e compromisso. Soluções para notebooks,
+                        computadores e equipamentos do seu dia a dia.
+                    </p>
+
+                    <div class="hero-botoes">
+
+                        <a href="https://wa.me/92991583740"
+                           class="botao-contato"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Solicitar atendimento
+                        </a>
+
+                        <a href="#servicos" class="botao-secundario">
+                            Conheça nossos serviços
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SEÇÃO DE SERVIÇOS -->
+        <section class="servicos" id="servicos">
+
+            <div class="container">
+
+                <!-- Título e apresentação da seção -->
+                <div class="servicos-titulo">
+                    <span>NOSSAS SOLUÇÕES</span>
+
+                    <h2>Conheça nossos serviços</h2>
+
+                    <p>
+                        Soluções técnicas para manter seus equipamentos
+                        funcionando da melhor maneira.
+                    </p>
+                </div>
+
+                <!-- Grade que organiza os cartões de serviços -->
+                <div class="servicos-grid">
+
+                    <!-- Serviço 1 -->
+                    <article class="servico-card">
+                        <h3>Manutenção preventiva de notebooks</h3>
+                        <p>
+                            Cuidados técnicos para preservar o funcionamento
+                            e o desempenho do seu equipamento.
+                        </p>
+                    </article>
+
+                    <!-- Serviço 2 -->
+                    <article class="servico-card">
+                        <h3>Limpeza interna e troca de pasta térmica</h3>
+                        <p>
+                            Limpeza interna de notebooks e substituição
+                            da pasta térmica para auxiliar na dissipação
+                            do calor.
+                        </p>
+                    </article>
+
+                    <!-- Serviço 3 -->
+                    <article class="servico-card">
+                        <h3>Formatação de computadores e notebooks</h3>
+                        <p>
+                            Formatação e preparação do sistema operacional
+                            para um funcionamento adequado.
+                        </p>
+                    </article>
+
+                    <!-- Serviço 4 -->
+                    <article class="servico-card">
+                        <h3>Troca de HD</h3>
+                        <p>
+                            Substituição de unidades de armazenamento
+                            conforme a necessidade do equipamento.
+                        </p>
+                    </article>
+
+                    <!-- Serviço 5 -->
+                    <article class="servico-card">
+                        <h3>Instalação e configuração de impressoras</h3>
+                        <p>
+                            Instalação de drivers e configuração
+                            de impressoras para utilização.
+                        </p>
+                    </article>
+
+                    <!-- Serviço 6 -->
+                    <article class="servico-card">
+                        <h3>Instalação de programas Windows e Office</h3>
+                        <p>
+                            Instalação e configuração de programas.
+                            Ativação mediante licença fornecida pelo cliente.
+                        </p>
+                    </article>
+
+                    <!-- Serviço 7 -->
+                    <article class="servico-card">
+                        <h3>Backup de dados</h3>
+                        <p>
+                            Cópia e organização de arquivos importantes
+                            para ajudar a preservar seus dados.
+                        </p>
+                    </article>
+
+                    <!-- Serviço 8 -->
+                    <article class="servico-card">
+                        <h3>Configuração de notebook novo</h3>
+                        <p>
+                            Configuração inicial do equipamento, ajustes do sistema,
+                            instalação de programas essenciais e preparação para começar a usar.
+                        </p>
+                    </article>
+
+
+                    <!-- Serviço 9 -->
+                    <article class="servico-card">
+                        <h3>Otimização de computadores e notebooks</h3>
+                        <p>
+                            Ajustes e otimizações no sistema operacional para melhorar
+                            o desempenho, reduzir lentidão e proporcionar uma experiência
+                            de uso mais eficiente.
+                        </p>
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEÇÃO SOBRE -->
+        <section class="sobre" id="sobre">
+
+            <div class="container">
+
+                <div class="sobre-conteudo">
+
+                    <!-- Identificação da seção -->
+                    <span class="sobre-destaque">CONHEÇA A SANDOVAL TI</span>
+
+                    <h2>
+                        Tecnologia com
+                        <span>atenção e compromisso.</span>
+                    </h2>
+
+                    <p>
+                        A Sandoval TI oferece serviços técnicos em informática,
+                        com foco em soluções para notebooks e computadores.
+                    </p>
+
+                    <p>
+                        Nosso objetivo é oferecer atendimento cuidadoso,
+                        orientação clara e soluções adequadas às necessidades
+                        de cada cliente.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEÇÃO CONTATO -->
+        <section class="contato" id="contato">
+
+            <div class="container">
+
+                <div class="contato-conteudo">
+
+                    <span class="contato-destaque">FALE COM A GENTE</span>
+
+                    <h2>
+                        Precisa de ajuda com
+                        <span>seu equipamento?</span>
+                    </h2>
+
+                    <p>
+                        Entre em contato com a Sandoval TI.
+                        Estamos à disposição para entender sua necessidade
+                        e apresentar uma solução.
+                    </p>
+
+                    <div class="contato-botoes">
+
+                        <a href="https://wa.me/92991583740"
+                        class="botao-contato"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            Fale pelo WhatsApp
+                        </a>
+
+                        <a href="https://www.instagram.com/_sandoval_ti/"
+                        class="botao-secundario"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            Acesse nosso Instagram
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+        <div class="container">
+            © 2026 Sandoval TI - Serviços Técnicos em Informática.
+            Todos os direitos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>

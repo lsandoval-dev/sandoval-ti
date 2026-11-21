@@ -1,0 +1,455 @@
+
+/* =================================
+   SANDOVAL TI - SITE INSTITUCIONAL
+================================= */
+
+
+/* CORES DO SITE */
+
+:root {
+    --cor-fundo: #050b18;
+    --cor-fundo-secundario: #0b1628;
+    --cor-azul: #087cff;
+    --cor-azul-claro: #35a5ff;
+    --cor-texto: #ffffff;
+    --cor-texto-secundario: #aab8cc;
+}
+
+
+/* CONFIGURAÇÕES GERAIS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* CABEÇALHO */
+
+.cabecalho {
+    width: 100%;
+    background-color: rgba(5, 11, 24, 0.95);
+    border-bottom: 1px solid rgba(8, 124, 255, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.cabecalho-conteudo {
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+.logo span {
+    color: var(--cor-azul);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.menu a {
+    color: var(--cor-texto-secundario);
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: var(--cor-azul-claro);
+}
+
+.botao-contato {
+    display: inline-block;
+    background: linear-gradient(135deg, #087cff, #0052cc);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 7px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.botao-contato:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(8, 124, 255, 0.3);
+}
+
+
+/* APRESENTAÇÃO PRINCIPAL */
+
+.hero {
+    min-height: 570px;
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(circle at 80% 45%, rgba(8, 124, 255, 0.18), transparent 35%),
+        var(--cor-fundo);
+}
+
+.hero-conteudo {
+    max-width: 750px;
+    padding: 90px 0;
+}
+
+.hero-destaque {
+    color: var(--cor-azul-claro);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 13px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 6vw, 65px);
+    line-height: 1.12;
+    margin: 20px 0;
+}
+
+.hero h1 span {
+    color: var(--cor-azul);
+}
+
+.hero p {
+    max-width: 620px;
+    color: var(--cor-texto-secundario);
+    font-size: 18px;
+    margin-bottom: 32px;
+}
+
+.hero-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.botao-secundario {
+    display: inline-block;
+    border: 1px solid var(--cor-azul);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 7px;
+    transition: 0.3s;
+}
+
+.botao-secundario:hover {
+    background-color: rgba(8, 124, 255, 0.15);
+}
+
+
+/* SEÇÃO DE SERVIÇOS */
+
+.servicos {
+    padding: 90px 0;
+    background-color: var(--cor-fundo-secundario);
+}
+
+.servicos-titulo {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+}
+
+.servicos-titulo span {
+    color: var(--cor-azul-claro);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.servicos-titulo h2 {
+    font-size: 36px;
+    margin: 12px 0;
+}
+
+.servicos-titulo p {
+    color: var(--cor-texto-secundario);
+    font-size: 16px;
+}
+
+
+/* GRADE DOS SERVIÇOS */
+
+.servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+
+/* CARTÕES DE SERVIÇOS */
+
+.servico-card {
+    background-color: var(--cor-fundo);
+    border: 1px solid rgba(8, 124, 255, 0.2);
+    border-radius: 12px;
+    padding: 30px;
+    transition: 0.3s;
+}
+
+.servico-card h3 {
+    color: var(--cor-azul-claro);
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.servico-card p {
+    color: var(--cor-texto-secundario);
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.servico-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cor-azul);
+    box-shadow: 0 10px 30px rgba(8, 124, 255, 0.12);
+}
+
+
+/* SEÇÃO SOBRE */
+
+.sobre {
+    padding: 90px 0;
+    background-color: var(--cor-fundo);
+}
+
+.sobre-conteudo {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.sobre-destaque {
+    color: var(--cor-azul-claro);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.sobre-conteudo h2 {
+    font-size: 36px;
+    margin: 15px 0 25px;
+}
+
+.sobre-conteudo h2 span {
+    color: var(--cor-azul);
+}
+
+.sobre-conteudo p {
+    color: var(--cor-texto-secundario);
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+
+/* SEÇÃO CONTATO */
+
+.contato {
+    padding: 90px 0;
+    background-color: var(--cor-fundo-secundario);
+}
+
+.contato-conteudo {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contato-destaque {
+    color: var(--cor-azul-claro);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.contato-conteudo h2 {
+    font-size: 36px;
+    margin: 15px 0 20px;
+}
+
+.contato-conteudo h2 span {
+    color: var(--cor-azul);
+}
+
+.contato-conteudo p {
+    color: var(--cor-texto-secundario);
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.contato-botoes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+
+/* RODAPÉ */
+
+.rodape {
+    padding: 25px 0;
+    text-align: center;
+    border-top: 1px solid rgba(8, 124, 255, 0.2);
+    color: var(--cor-texto-secundario);
+    font-size: 14px;
+}
+
+
+/* RESPONSIVIDADE - TABLETS */
+
+@media (max-width: 768px) {
+
+    .cabecalho-conteudo {
+        flex-direction: column;
+        padding: 20px 0;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero {
+        min-height: auto;
+    }
+
+    .hero-conteudo {
+        padding: 75px 0;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .servicos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+
+/* RESPONSIVIDADE - CELULARES */
+
+@media (max-width: 480px) {
+
+    /* Reduz as margens laterais */
+    .container {
+        width: 92%;
+    }
+
+    /* Organiza melhor o cabeçalho */
+    .cabecalho-conteudo {
+        gap: 18px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .menu {
+        gap: 12px;
+    }
+
+    .menu a {
+        font-size: 14px;
+    }
+
+    /* Ajusta a apresentação principal */
+    .hero-conteudo {
+        padding: 60px 0;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero-destaque {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .hero-botoes {
+        flex-direction: column;
+    }
+
+    .hero-botoes a {
+        text-align: center;
+    }
+
+    /* Ajusta a seção de serviços */
+    .servicos,
+    .sobre,
+    .contato {
+        padding: 65px 0;
+    }
+
+    .servicos-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .servicos-titulo h2,
+    .sobre-conteudo h2,
+    .contato-conteudo h2 {
+        font-size: 28px;
+    }
+
+    .servico-card {
+        padding: 24px;
+    }
+
+    .servico-card h3 {
+        font-size: 18px;
+    }
+
+    /* Organiza os botões de contato */
+    .contato-botoes {
+        flex-direction: column;
+    }
+
+    .contato-botoes a {
+        text-align: center;
+    }
+
+}
+
+/* AJUSTE DE NAVEGAÇÃO COM MENU FIXO */
+
+html {
+    scroll-padding-top: 100px;
+}
+

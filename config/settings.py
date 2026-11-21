@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'institucional',
 ]
 
 MIDDLEWARE = [
@@ -115,6 +116,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = '/sistema/login/'
+LOGIN_REDIRECT_URL = '/sistema/'
+LOGOUT_REDIRECT_URL = '/sistema/login/'

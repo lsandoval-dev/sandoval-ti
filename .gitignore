@@ -1,20 +1,32 @@
+
+# Arquivos de log
+*.log
+
+# Banco de dados local
+*.sqlite3
+db.sqlite3
+
+# Cache e arquivos compilados do Python
+__pycache__/
+*.py[cod]
+
+# Ambientes virtuais
 venv/
 .venv/
 env/
 
-*.sqlite3
-*.db
-
+# Variáveis de ambiente e segredos
 .env
 .env.*
+!.env.example
 
-__pycache__/
-*.py[cod]
-*$py.class
+# Arquivos gerados pelo Django
+staticfiles/
 
-*.log
+# Arquivos do sistema operacional
 .DS_Store
 Thumbs.db
 
+# Arquivos de mídia enviados localmente
 media/*
 !media/.gitkeep
