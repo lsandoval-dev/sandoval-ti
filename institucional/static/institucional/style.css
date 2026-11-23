@@ -1154,4 +1154,10 @@ html {
     }
 }
 
+/* PADRONIZA ALTURA DOS TÍTULOS DOS SERVIÇOS */
+
+.servico-card h3 {
+    min-height: 58px;
+}
+
 
