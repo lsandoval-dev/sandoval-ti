@@ -43,7 +43,9 @@ a {
 }
 
 
-/* CABEÇALHO */
+/* =================================
+   CABEÇALHO
+================================= */
 
 .cabecalho {
     width: 100%;
@@ -62,16 +64,26 @@ a {
     gap: 30px;
 }
 
+
+/* LOGO SANDOVAL TI */
+
 .logo {
-    font-size: 27px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.logo img {
+    display: block;
+    width: auto;
+    height: 80px;
+    max-width: 100%;
+    object-fit: contain;
 }
 
 
-.logo span {
-    color: var(--cor-azul);
-}
+/* MENU */
 
 .menu {
     display: flex;
@@ -87,6 +99,9 @@ a {
 .menu a:hover {
     color: var(--cor-azul-claro);
 }
+
+
+/* BOTÃO DE CONTATO */
 
 .botao-contato {
     display: inline-block;
@@ -104,7 +119,9 @@ a {
 }
 
 
-/* APRESENTAÇÃO PRINCIPAL */
+/* =================================
+   APRESENTAÇÃO PRINCIPAL
+================================= */
 
 .hero {
     min-height: 570px;
@@ -143,6 +160,7 @@ a {
     color: var(--cor-texto-secundario);
     font-size: 18px;
     margin-bottom: 32px;
+    text-align: justify;
 }
 
 .hero-botoes {
@@ -150,6 +168,9 @@ a {
     flex-wrap: wrap;
     gap: 15px;
 }
+
+
+/* BOTÃO SECUNDÁRIO */
 
 .botao-secundario {
     display: inline-block;
@@ -165,12 +186,17 @@ a {
 }
 
 
-/* SEÇÃO DE SERVIÇOS */
+/* =================================
+   SEÇÃO DE SERVIÇOS
+================================= */
 
 .servicos {
     padding: 90px 0;
     background-color: var(--cor-fundo-secundario);
 }
+
+
+/* TÍTULO DOS SERVIÇOS */
 
 .servicos-titulo {
     text-align: center;
@@ -196,46 +222,175 @@ a {
 }
 
 
-/* GRADE DOS SERVIÇOS */
+/* =================================
+   GRADE DOS SERVIÇOS
+================================= */
 
 .servicos-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    align-items: start;
 }
 
 
-/* CARTÕES DE SERVIÇOS */
+/* =================================
+   CARTÕES DE SERVIÇOS
+================================= */
 
 .servico-card {
     background-color: var(--cor-fundo);
     border: 1px solid rgba(8, 124, 255, 0.2);
-    border-radius: 12px;
-    padding: 30px;
-    transition: 0.3s;
+    border-radius: 14px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* DESTAQUE DO CARTÃO */
+
+.servico-card:hover,
+.servico-card.expandido {
+    border-color: var(--cor-azul);
+    box-shadow: 0 10px 30px rgba(8, 124, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+
+/* =================================
+   IMAGENS DOS SERVIÇOS
+================================= */
+
+.servico-imagem {
+    display: block;
+    width: 100%;
+    height: 240px;
+
+    object-fit: contain;
+    object-position: center;
+
+    background-color: #0b1628;
+}
+
+
+/* =================================
+   CONTEÚDO DOS CARTÕES
+================================= */
+
+.servico-card-conteudo {
+    padding: 26px;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .servico-card h3 {
     color: var(--cor-azul-claro);
-    font-size: 20px;
-    margin-bottom: 15px;
+    font-size: 21px;
+    line-height: 1.4;
+    margin-bottom: 14px;
 }
 
-.servico-card p {
+.servico-resumo {
     color: var(--cor-texto-secundario);
     font-size: 15px;
-    line-height: 1.7;
-    text-align: justify;
-}
-
-.servico-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--cor-azul);
-    box-shadow: 0 10px 30px rgba(8, 124, 255, 0.12);
+    line-height: 1.8;
+    margin-bottom: 22px;
+    flex: 1;
 }
 
 
-/* SEÇÃO SOBRE */
+/* =================================
+   BOTÃO VER DETALHES
+================================= */
+
+.botao-expandir {
+    width: 100%;
+    padding: 13px;
+
+    border: 1px solid var(--cor-azul);
+    border-radius: 7px;
+
+    background: transparent;
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.3s;
+    margin-top: auto;
+}
+
+.botao-expandir:hover {
+    background-color: rgba(8, 124, 255, 0.15);
+}
+
+
+/* =================================
+   DETALHES EXPANSÍVEIS
+================================= */
+
+.servico-detalhes {
+    display: none;
+    padding: 0 26px 26px;
+}
+
+.servico-card.expandido .servico-detalhes {
+    display: block;
+}
+
+.servico-detalhes p {
+    color: var(--cor-texto-secundario);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+
+/* =================================
+   BOTÃO WHATSAPP DOS SERVIÇOS
+================================= */
+
+.servico-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.botao-solicitar {
+    display: block;
+    text-align: center;
+
+    background: linear-gradient(135deg, #087cff, #0052cc);
+    color: white;
+
+    padding: 14px;
+    border-radius: 7px;
+
+    font-weight: bold;
+    line-height: 1.5;
+
+    transition: 0.3s;
+}
+
+.botao-solicitar:hover {
+    background: var(--cor-azul-claro);
+    transform: translateY(-2px);
+}
+
+
+/* =================================
+   SEÇÃO SOBRE
+================================= */
 
 .sobre {
     padding: 90px 0;
@@ -269,10 +424,13 @@ a {
     font-size: 17px;
     line-height: 1.8;
     margin-bottom: 15px;
+    text-align: justify;
 }
 
 
-/* SEÇÃO CONTATO */
+/* =================================
+   SEÇÃO CONTATO
+================================= */
 
 .contato {
     padding: 90px 0;
@@ -306,6 +464,7 @@ a {
     font-size: 17px;
     line-height: 1.8;
     margin-bottom: 30px;
+    text-align: justify;
 }
 
 .contato-botoes {
@@ -316,31 +475,45 @@ a {
 }
 
 
-/* RODAPÉ */
+/* =================================
+   RODAPÉ
+================================= */
 
 .rodape {
     padding: 25px 0;
     text-align: center;
+
     border-top: 1px solid rgba(8, 124, 255, 0.2);
+
     color: var(--cor-texto-secundario);
     font-size: 14px;
 }
 
 
-/* RESPONSIVIDADE - TABLETS */
+/* =================================
+   RESPONSIVIDADE - TABLETS
+================================= */
 
 @media (max-width: 768px) {
+
+    /* CABEÇALHO */
 
     .cabecalho-conteudo {
         flex-direction: column;
         padding: 20px 0;
     }
 
+
+    /* MENU */
+
     .menu {
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px;
     }
+
+
+    /* APRESENTAÇÃO */
 
     .hero {
         min-height: auto;
@@ -354,24 +527,32 @@ a {
         font-size: 16px;
     }
 
+
+    /* SERVIÇOS */
+
     .servicos-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
     }
 
 }
 
 
-
-/* RESPONSIVIDADE - CELULARES */
+/* =================================
+   RESPONSIVIDADE - CELULARES
+================================= */
 
 @media (max-width: 480px) {
 
-    /* Reduz as margens laterais */
+    /* MARGENS LATERAIS */
+
     .container {
         width: 92%;
     }
 
-    /* Organiza melhor o cabeçalho */
+
+    /* CABEÇALHO */
+
     .cabecalho-conteudo {
         gap: 18px;
     }
@@ -379,6 +560,9 @@ a {
     .logo {
         font-size: 25px;
     }
+
+
+    /* MENU */
 
     .menu {
         gap: 12px;
@@ -388,7 +572,9 @@ a {
         font-size: 14px;
     }
 
-    /* Ajusta a apresentação principal */
+
+    /* APRESENTAÇÃO */
+
     .hero-conteudo {
         padding: 60px 0;
     }
@@ -410,17 +596,51 @@ a {
         text-align: center;
     }
 
-    /* Ajusta a seção de serviços */
+
+    /* SEÇÕES */
+
     .servicos,
     .sobre,
     .contato {
         padding: 65px 0;
     }
 
+
+    /* GRADE DOS SERVIÇOS */
+
     .servicos-grid {
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 22px;
     }
+
+
+    /* IMAGENS */
+
+    .servico-imagem {
+        height: 230px;
+    }
+
+
+    /* CARTÕES */
+
+    .servico-card-conteudo {
+        padding: 24px;
+    }
+
+    .servico-card h3 {
+        font-size: 20px;
+    }
+
+    .servico-resumo {
+        font-size: 15px;
+    }
+
+    .servico-detalhes {
+        padding: 0 24px 24px;
+    }
+
+
+    /* TÍTULOS DAS SEÇÕES */
 
     .servicos-titulo h2,
     .sobre-conteudo h2,
@@ -428,15 +648,9 @@ a {
         font-size: 28px;
     }
 
-    .servico-card {
-        padding: 24px;
-    }
 
-    .servico-card h3 {
-        font-size: 18px;
-    }
+    /* CONTATO */
 
-    /* Organiza os botões de contato */
     .contato-botoes {
         flex-direction: column;
     }
@@ -447,9 +661,497 @@ a {
 
 }
 
-/* AJUSTE DE NAVEGAÇÃO COM MENU FIXO */
+
+/* =================================
+   AJUSTE DE NAVEGAÇÃO COM MENU FIXO
+================================= */
 
 html {
     scroll-padding-top: 100px;
 }
+
+
+/* =================================
+   MENU HAMBÚRGUER
+================================= */
+
+
+/* BOTÃO OCULTO NO COMPUTADOR */
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 27px;
+    height: 3px;
+    margin: 5px 0;
+
+    background-color: var(--cor-azul-claro);
+    border-radius: 3px;
+
+    transition: 0.3s;
+}
+
+
+/* ORGANIZAÇÃO DO MENU NO COMPUTADOR */
+
+.menu-area {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+
+/* ANIMAÇÃO DO BOTÃO QUANDO ABERTO */
+
+.menu-toggle.ativo span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.ativo span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.ativo span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* =================================
+   MENU PARA CELULARES E TABLETS
+================================= */
+
+@media (max-width: 768px) {
+
+    /* CABEÇALHO MOBILE */
+
+    .cabecalho-conteudo {
+        min-height: 75px;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 0;
+        gap: 15px;
+    }
+
+
+    /* BOTÃO HAMBÚRGUER */
+
+    .menu-toggle {
+        display: block;
+        z-index: 1002;
+    }
+
+
+    /* MENU EXPANSÍVEL */
+
+    .menu-area {
+        display: none;
+
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+        padding: 25px 5%;
+
+        background-color: #0b1628;
+
+        border-top: 1px solid rgba(8, 124, 255, 0.2);
+        border-bottom: 1px solid rgba(8, 124, 255, 0.2);
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+    }
+
+
+    /* MENU ABERTO */
+
+    .menu-area.aberto {
+        display: flex;
+    }
+
+
+    /* LINKS */
+
+    .menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .menu a {
+        font-size: 16px;
+        padding: 5px;
+    }
+
+
+    /* BOTÃO DE CONTATO */
+
+    .menu-area .botao-contato {
+        text-align: center;
+    }
+
+}
+
+
+/* =================================
+   AJUSTE DA LOGO EM TELAS MENORES
+================================= */
+
+@media (max-width: 768px) {
+
+    .logo img {
+        height: 55px;
+    }
+
+}
+
+@media (max-width: 380px) {
+
+    .logo img {
+        height: 45px;
+    }
+
+}
+
+
+/* =================================
+   DESTAQUE DOS ITENS DO MENU MOBILE
+================================= */
+
+@media (max-width: 768px) {
+
+    .menu {
+        width: 100%;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .menu a {
+        display: block;
+        width: 100%;
+        padding: 13px 18px;
+
+        border-radius: 8px;
+        text-align: center;
+
+        transition: all 0.3s ease;
+    }
+
+
+    /* ITEM SELECIONADO */
+
+    .menu a.ativo {
+        background-color: var(--cor-azul);
+        color: #ffffff;
+        font-weight: 600;
+
+        box-shadow: 0 0 12px rgba(8, 124, 255, 0.25);
+    }
+
+
+    /* EFEITO AO TOCAR OU PASSAR O MOUSE */
+
+    .menu a:hover {
+        background-color: rgba(8, 124, 255, 0.18);
+        color: #ffffff;
+    }
+
+}
+
+
+/* =================================
+   BOTÃO WHATSAPP DO CABEÇALHO
+================================= */
+
+.botao-contato {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    transition: all 0.3s ease;
+}
+
+.botao-contato i {
+    font-size: 19px;
+}
+
+.botao-contato:hover {
+    background-color: var(--cor-azul-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px rgba(8, 124, 255, 0.35);
+}
+
+
+/* =================================
+   HERO - TEXTO E IMAGEM LADO A LADO
+================================= */
+
+.hero-layout {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 35px;
+}
+
+.hero-conteudo {
+    max-width: 750px;
+    padding: 90px 0;
+}
+
+.hero-imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+
+.hero-imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    position: relative;
+    transform: translateY(-25px);
+}
+
+
+.hero-imagem img {
+    display: block;
+    width: 100%;
+    max-width: 680px;
+    max-height: 520px;
+    object-fit: contain;
+
+    -webkit-mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            black 18%,
+            black 82%,
+            transparent 100%
+        ),
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 18%,
+            black 75%,
+            transparent 100%
+        );
+
+    -webkit-mask-composite: source-in;
+
+    mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            black 18%,
+            black 82%,
+            transparent 100%
+        ),
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 18%,
+            black 75%,
+            transparent 100%
+        );
+
+    mask-composite: intersect;
+}
+
+
+
+/* =================================
+   RESPONSIVIDADE DO HERO
+================================= */
+
+@media (max-width: 768px) {
+
+    .hero {
+        min-height: auto;
+    }
+
+    .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .hero-conteudo {
+        padding: 75px 0 15px;
+    }
+
+    .hero-imagem {
+        padding-bottom: 45px;
+    }
+
+    .hero-imagem img {
+        max-width: 520px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .hero-conteudo {
+        padding: 60px 0 10px;
+    }
+
+    .hero-imagem img {
+        max-width: 100%;
+    }
+
+}
+
+
+/* =================================
+   PERGUNTAS FREQUENTES - FAQ
+================================= */
+
+.faq {
+    padding: 90px 0;
+    background: var(--cor-fundo-secundario);
+}
+
+.faq-cabecalho {
+    max-width: 750px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.faq-destaque {
+    display: inline-block;
+    color: var(--cor-azul-claro);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.faq-cabecalho h2 {
+    color: var(--cor-texto);
+    font-size: 36px;
+    margin-bottom: 18px;
+}
+
+.faq-cabecalho h2 span {
+    color: var(--cor-azul);
+}
+
+.faq-cabecalho p {
+    color: var(--cor-texto-secundario);
+    line-height: 1.7;
+    text-align: center;
+}
+
+.faq-lista {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.faq-item {
+    background: var(--cor-fundo);
+    border: 1px solid rgba(8, 124, 255, 0.20);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.faq-item:hover,
+.faq-item[open] {
+    border-color: var(--cor-azul);
+}
+
+.faq-item summary {
+    position: relative;
+    padding: 22px 60px 22px 24px;
+    color: var(--cor-texto);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    cursor: pointer;
+    list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--cor-azul-claro);
+    font-size: 25px;
+    font-weight: 400;
+    transition: transform 0.3s ease;
+}
+
+.faq-item[open] summary::after {
+    content: "−";
+    color: var(--cor-azul-claro);
+}
+
+.faq-resposta {
+    padding: 0 24px 22px;
+}
+
+.faq-resposta p {
+    color: var(--cor-texto-secundario);
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+    text-align: justify;
+}
+
+/* RESPONSIVIDADE FAQ */
+
+@media (max-width: 768px) {
+    .faq {
+        padding: 65px 0;
+    }
+
+    .faq-cabecalho {
+        margin-bottom: 30px;
+    }
+
+    .faq-cabecalho h2 {
+        font-size: 29px;
+    }
+
+    .faq-item summary {
+        padding: 19px 52px 19px 18px;
+        font-size: 15px;
+    }
+
+    .faq-item summary::after {
+        right: 18px;
+    }
+
+    .faq-resposta {
+        padding: 0 18px 20px;
+    }
+
+    .faq-resposta p {
+        font-size: 14px;
+    }
+}
+
 

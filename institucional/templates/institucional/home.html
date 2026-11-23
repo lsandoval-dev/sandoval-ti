@@ -14,38 +14,67 @@
 </head>
 
 <body>
-
     <!-- CABEÇALHO -->
     <header class="cabecalho">
         <div class="container cabecalho-conteudo">
 
-            <a href="/" class="logo">
-                SANDOVAL <span>TI</span>
+            <a href="/" class="logo" aria-label="Sandoval TI">
+                <img
+                    src="{% static 'institucional/img/logo-sandoval.png' %}"
+                    alt="Sandoval TI - Serviços de Informática"
+                >
             </a>
 
-            <nav class="menu" aria-label="Menu principal">
-                <a href="#inicio">Início</a>
-                <a href="#servicos">Serviços</a>
-                <a href="#sobre">Sobre</a>
-                <a href="#contato">Contato</a>
-            </nav>
+            <!-- BOTÃO MENU HAMBÚRGUER -->
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+                aria-controls="menu-principal"
+                type="button">
 
-            <a href="https://wa.me/92991583740"
-               class="botao-contato"
-               target="_blank"
-               rel="noopener noreferrer">
-                Fale conosco
-            </a>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+            
+            <!-- MENU E CONTATO -->
+            <div class="menu-area" id="menu-principal">
+
+                <nav class="menu" aria-label="Menu principal">
+                    <a href="#inicio">Início</a>
+                    <a href="#servicos">Serviços</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#contato">Contato</a>
+                </nav>
+
+                <a href="https://wa.me/92991583740"
+                class="botao-contato"
+                target="_blank"
+                rel="noopener noreferrer">
+                    <i class="bi bi-whatsapp"></i>
+                    Fale pelo WhatsApp
+                </a>
+
+            </div>
 
         </div>
     </header>
 
 
+
     <!-- APRESENTAÇÃO PRINCIPAL -->
     <main>
 
-        <section class="hero" id="inicio">
-            <div class="container">
+        
+    <section class="hero" id="inicio">
+        <div class="container">
+
+            <div class="hero-layout">
 
                 <div class="hero-conteudo">
 
@@ -67,9 +96,9 @@
                     <div class="hero-botoes">
 
                         <a href="https://wa.me/92991583740"
-                           class="botao-contato"
-                           target="_blank"
-                           rel="noopener noreferrer">
+                        class="botao-contato"
+                        target="_blank"
+                        rel="noopener noreferrer">
                             Solicitar atendimento
                         </a>
 
@@ -81,16 +110,24 @@
 
                 </div>
 
+                <div class="hero-imagem">
+                    <img src="{% static 'institucional/img/hero-notebook.jpg' %}"
+                        alt="Notebook em ambiente tecnológico">
+                </div>
+
             </div>
-        </section>
+
+        </div>
+    </section>
 
 
+
+        
         <!-- SEÇÃO DE SERVIÇOS -->
         <section class="servicos" id="servicos">
 
             <div class="container">
 
-                <!-- Título e apresentação da seção -->
                 <div class="servicos-titulo">
                     <span>NOSSAS SOLUÇÕES</span>
 
@@ -102,93 +139,473 @@
                     </p>
                 </div>
 
-                <!-- Grade que organiza os cartões de serviços -->
                 <div class="servicos-grid">
 
                     <!-- Serviço 1 -->
                     <article class="servico-card">
-                        <h3>Manutenção preventiva de notebooks</h3>
-                        <p>
-                            Cuidados técnicos para preservar o funcionamento
-                            e o desempenho do seu equipamento.
-                        </p>
+
+                        <img src="{% static 'institucional/img/manutencao-notebook.jpg' %}"
+                            alt="Manutenção preventiva de notebook"
+                            class="servico-imagem"
+                            loading="lazy">
+
+                        <div class="servico-card-conteudo">
+                            <h3>Manutenção preventiva de notebooks</h3>
+
+                            <p class="servico-resumo">
+                                Avaliação geral do equipamento para identificar
+                                possíveis problemas e sinais de desgaste.
+                            </p>
+
+                            <button class="botao-expandir" type="button" aria-expanded="false">
+                                Ver detalhes
+                            </button>
+                        </div>
+
+                        <div class="servico-detalhes">
+                            <p>
+                                Verificação das condições gerais do notebook,
+                                funcionamento dos componentes, ventilação e
+                                identificação de possíveis sinais de aquecimento
+                                ou desgaste.
+                            </p>
+
+                            <div class="servico-acoes">
+                                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20manuten%C3%A7%C3%A3o%20preventiva%20para%20meu%20notebook."
+                                class="botao-solicitar" target="_blank" rel="noopener noreferrer">
+                                    Solicitar este serviço pelo WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </article>
+
 
                     <!-- Serviço 2 -->
                     <article class="servico-card">
-                        <h3>Limpeza interna e troca de pasta térmica</h3>
-                        <p>
-                            Limpeza interna de notebooks e substituição
-                            da pasta térmica para auxiliar na dissipação
-                            do calor.
-                        </p>
+
+                        <img src="{% static 'institucional/img/limpeza-notebook.jpg' %}"
+                            alt="Limpeza interna de notebook"
+                            class="servico-imagem"
+                            loading="lazy">
+
+                        <div class="servico-card-conteudo">
+                            <h3>Limpeza interna e troca de pasta térmica</h3>
+
+                            <p class="servico-resumo">
+                                Limpeza dos componentes internos e cuidados
+                                com o sistema de refrigeração.
+                            </p>
+
+                            <button class="botao-expandir" type="button" aria-expanded="false">
+                                Ver detalhes
+                            </button>
+                        </div>
+
+                        <div class="servico-detalhes">
+                            <p>
+                                Abertura do notebook, remoção de poeira acumulada
+                                nos componentes internos e limpeza do sistema
+                                de ventilação. Substituição da pasta térmica
+                                quando necessária e autorizada pelo cliente.
+                            </p>
+
+                            <div class="servico-acoes">
+                                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20limpeza%20interna%20e%20troca%20de%20pasta%20t%C3%A9rmica%20do%20meu%20notebook."
+                                class="botao-solicitar" target="_blank" rel="noopener noreferrer">
+                                    Solicitar este serviço pelo WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </article>
+
 
                     <!-- Serviço 3 -->
                     <article class="servico-card">
-                        <h3>Formatação de computadores e notebooks</h3>
-                        <p>
-                            Formatação e preparação do sistema operacional
-                            para um funcionamento adequado.
-                        </p>
+
+                        <img src="{% static 'institucional/img/formatacao.jpg' %}"
+                            alt="Formatação de computador e notebook"
+                            class="servico-imagem"
+                            loading="lazy">
+
+                        <div class="servico-card-conteudo">
+                            <h3>Formatação de computadores e notebooks</h3>
+
+                            <p class="servico-resumo">
+                                Reinstalação do Windows e configuração
+                                inicial do sistema operacional.
+                            </p>
+
+                            <button class="botao-expandir" type="button" aria-expanded="false">
+                                Ver detalhes
+                            </button>
+                        </div>
+
+                        <div class="servico-detalhes">
+                            <p>
+                                Reinstalação do Windows, instalação de drivers,
+                                aplicação de atualizações disponíveis e configuração
+                                inicial do sistema. O backup dos arquivos é um
+                                serviço adicional, quando solicitado.
+                            </p>
+
+                            <div class="servico-acoes">
+                                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20formata%C3%A7%C3%A3o%20do%20meu%20computador%20ou%20notebook."
+                                class="botao-solicitar" target="_blank" rel="noopener noreferrer">
+                                    Solicitar este serviço pelo WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </article>
+
 
                     <!-- Serviço 4 -->
                     <article class="servico-card">
-                        <h3>Troca de HD</h3>
-                        <p>
-                            Substituição de unidades de armazenamento
-                            conforme a necessidade do equipamento.
-                        </p>
+
+                        <img src="{% static 'institucional/img/troca-hd.jpg' %}"
+                            alt="Substituição de HD"
+                            class="servico-imagem"
+                            loading="lazy">
+
+                        <div class="servico-card-conteudo">
+                            <h3>Troca de HD</h3>
+
+                            <p class="servico-resumo">
+                                Substituição da unidade de armazenamento
+                                do computador ou notebook.
+                            </p>
+
+                            <button class="botao-expandir" type="button" aria-expanded="false">
+                                Ver detalhes
+                            </button>
+                        </div>
+
+                        <div class="servico-detalhes">
+                            <p>
+                                Remoção da unidade de armazenamento antiga e
+                                instalação da nova unidade. A instalação do Windows
+                                e a transferência dos arquivos podem ser realizadas
+                                mediante contratação dos serviços adicionais.
+                            </p>
+
+                            <div class="servico-acoes">
+                                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20troca%20de%20HD%20do%20meu%20equipamento."
+                                class="botao-solicitar" target="_blank" rel="noopener noreferrer">
+                                    Solicitar este serviço pelo WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </article>
+
 
                     <!-- Serviço 5 -->
                     <article class="servico-card">
-                        <h3>Instalação e configuração de impressoras</h3>
-                        <p>
-                            Instalação de drivers e configuração
-                            de impressoras para utilização.
-                        </p>
+
+                        <img src="{% static 'institucional/img/impressora.jpg' %}"
+                            alt="Instalação e configuração de impressora"
+                            class="servico-imagem"
+                            loading="lazy">
+
+                        <div class="servico-card-conteudo">
+                            <h3>Instalação e configuração de impressoras</h3>
+
+                            <p class="servico-resumo">
+                                Instalação de drivers e configuração
+                                da impressora no computador.
+                            </p>
+
+                            <button class="botao-expandir" type="button" aria-expanded="false">
+                                Ver detalhes
+                            </button>
+                        </div>
+
+                        <div class="servico-detalhes">
+                            <p>
+                                Instalação dos drivers, configuração da conexão
+                                USB ou Wi-Fi, reconhecimento da impressora pelo
+                                computador e realização de testes de impressão.
+                            </p>
+
+                            <div class="servico-acoes">
+                                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20instala%C3%A7%C3%A3o%20e%20configura%C3%A7%C3%A3o%20de%20impressora."
+                                class="botao-solicitar" target="_blank" rel="noopener noreferrer">
+                                    Solicitar este serviço pelo WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </article>
+
 
                     <!-- Serviço 6 -->
                     <article class="servico-card">
-                        <h3>Instalação de programas Windows e Office</h3>
-                        <p>
-                            Instalação e configuração de programas.
-                            Ativação mediante licença fornecida pelo cliente.
-                        </p>
+
+                        <img src="{% static 'institucional/img/programas-windows.jpg' %}"
+                            alt="Instalação de programas Windows e Office"
+                            class="servico-imagem"
+                            loading="lazy">
+
+                        <div class="servico-card-conteudo">
+                            <h3>Instalação de programas Windows e Office</h3>
+
+                            <p class="servico-resumo">
+                                Instalação e configuração de programas
+                                para uso pessoal ou profissional.
+                            </p>
+
+                            <button class="botao-expandir" type="button" aria-expanded="false">
+                                Ver detalhes
+                            </button>
+                        </div>
+
+                        <div class="servico-detalhes">
+                            <p>
+                                Instalação e configuração de programas compatíveis
+                                com Windows, incluindo aplicativos do Office.
+                                Ativação mediante licença ou chave fornecida
+                                pelo cliente.
+                            </p>
+
+                            <div class="servico-acoes">
+                                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20instala%C3%A7%C3%A3o%20de%20programas%20Windows%20ou%20Office."
+                                class="botao-solicitar" target="_blank" rel="noopener noreferrer">
+                                    Solicitar este serviço pelo WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </article>
+
 
                     <!-- Serviço 7 -->
                     <article class="servico-card">
-                        <h3>Backup de dados</h3>
-                        <p>
-                            Cópia e organização de arquivos importantes
-                            para ajudar a preservar seus dados.
-                        </p>
+
+                        <img src="{% static 'institucional/img/backup-dados.jpg' %}"
+                            alt="Backup e transferência de dados"
+                            class="servico-imagem"
+                            loading="lazy">
+
+                        <div class="servico-card-conteudo">
+                            <h3>Backup de dados</h3>
+
+                            <p class="servico-resumo">
+                                Cópia e organização de documentos,
+                                fotos e arquivos pessoais.
+                            </p>
+
+                            <button class="botao-expandir" type="button" aria-expanded="false">
+                                Ver detalhes
+                            </button>
+                        </div>
+
+                        <div class="servico-detalhes">
+                            <p>
+                                Cópia e organização de documentos, fotos e arquivos
+                                pessoais, com transferência para HD externo,
+                                pendrive ou outro dispositivo indicado pelo cliente.
+                                Verificação dos arquivos copiados.
+                            </p>
+
+                            <div class="servico-acoes">
+                                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20backup%20dos%20meus%20arquivos."
+                                class="botao-solicitar" target="_blank" rel="noopener noreferrer">
+                                    Solicitar este serviço pelo WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </article>
+
 
                     <!-- Serviço 8 -->
                     <article class="servico-card">
-                        <h3>Configuração de notebook novo</h3>
-                        <p>
-                            Configuração inicial do equipamento, ajustes do sistema,
-                            instalação de programas essenciais e preparação para começar a usar.
-                        </p>
+
+                        <img src="{% static 'institucional/img/notebook-novo.jpg' %}"
+                            alt="Configuração inicial de notebook novo"
+                            class="servico-imagem"
+                            loading="lazy">
+
+                        <div class="servico-card-conteudo">
+                            <h3>Configuração de notebook novo</h3>
+
+                            <p class="servico-resumo">
+                                Preparação inicial do equipamento
+                                para começar a utilizar.
+                            </p>
+
+                            <button class="botao-expandir" type="button" aria-expanded="false">
+                                Ver detalhes
+                            </button>
+                        </div>
+
+                        <div class="servico-detalhes">
+                            <p>
+                                Configuração inicial do Windows, instalação de drivers,
+                                aplicação de atualizações disponíveis, ajustes básicos
+                                do sistema e instalação de programas essenciais.
+                            </p>
+
+                            <div class="servico-acoes">
+                                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20configura%C3%A7%C3%A3o%20inicial%20do%20meu%20notebook%20novo."
+                                class="botao-solicitar" target="_blank" rel="noopener noreferrer">
+                                    Solicitar este serviço pelo WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </article>
 
 
                     <!-- Serviço 9 -->
                     <article class="servico-card">
-                        <h3>Otimização de computadores e notebooks</h3>
-                        <p>
-                            Ajustes e otimizações no sistema operacional para melhorar
-                            o desempenho, reduzir lentidão e proporcionar uma experiência
-                            de uso mais eficiente.
-                        </p>
+
+                        <img src="{% static 'institucional/img/otimizacao.jpg' %}"
+                            alt="Otimização de computador e notebook"
+                            class="servico-imagem"
+                            loading="lazy">
+
+                        <div class="servico-card-conteudo">
+                            <h3>Otimização de computadores e notebooks</h3>
+
+                            <p class="servico-resumo">
+                                Análise e ajustes do Windows para melhorar
+                                o desempenho do equipamento.
+                            </p>
+
+                            <button class="botao-expandir" type="button" aria-expanded="false">
+                                Ver detalhes
+                            </button>
+                        </div>
+
+                        <div class="servico-detalhes">
+                            <p>
+                                Análise dos fatores que podem causar lentidão,
+                                revisão dos programas de inicialização e ajustes
+                                do Windows para melhorar o desempenho. Os resultados
+                                dependem das condições do equipamento.
+                            </p>
+
+                            <div class="servico-acoes">
+                                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20otimiza%C3%A7%C3%A3o%20do%20meu%20computador%20ou%20notebook."
+                                class="botao-solicitar" target="_blank" rel="noopener noreferrer">
+                                    Solicitar este serviço pelo WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </article>
 
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEÇÃO PERGUNTAS FREQUENTES -->
+        <section class="faq" id="faq">
+
+            <div class="container">
+
+                <div class="faq-cabecalho">
+                    <span class="faq-destaque">TIRE SUAS DÚVIDAS</span>
+
+                    <h2>
+                        Perguntas <span>frequentes.</span>
+                    </h2>
+
+                    <p>
+                        Confira algumas dúvidas comuns sobre os serviços
+                        e o atendimento da Sandoval TI.
+                    </p>
+                </div>
+
+                <div class="faq-lista">
+
+                    <details class="faq-item">
+                        <summary>Quais serviços a Sandoval TI oferece?</summary>
+                        <div class="faq-resposta">
+                            <p>
+                                Oferecemos serviços técnicos em informática,
+                                com foco principal em notebooks. Trabalhamos
+                                com manutenção preventiva, limpeza interna,
+                                formatação, instalação de programas,
+                                configuração de impressoras, backup e
+                                otimização do Windows.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>A Sandoval TI trabalha com venda de peças e equipamentos?</summary>
+                        <div class="faq-resposta">
+                            <p>
+                                Nosso trabalho é voltado à prestação de
+                                serviços técnicos e mão de obra. Quando houver
+                                necessidade de peças ou materiais, as condições
+                                são conversadas e combinadas com o cliente.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Como funciona a busca e a entrega do notebook?</summary>
+                        <div class="faq-resposta">
+                            <p>
+                                No bairro São Raimundo, buscamos o notebook
+                                e realizamos a entrega após o serviço,
+                                proporcionando mais comodidade ao cliente.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>A Sandoval TI atende outros bairros?</summary>
+                        <div class="faq-resposta">
+                            <p>
+                                Para bairros próximos ao São Raimundo,
+                                a disponibilidade da busca e entrega e as
+                                condições de atendimento devem ser combinadas
+                                previamente.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Como funciona o orçamento?</summary>
+                        <div class="faq-resposta">
+                            <p>
+                                O cliente entra em contato, informa o problema
+                                do equipamento e recebe as informações sobre
+                                valores e condições antes da execução do serviço.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Preciso fornecer a licença do Windows ou Office?</summary>
+                        <div class="faq-resposta">
+                            <p>
+                                Sim. Quando o serviço envolver ativação do
+                                Windows ou Office, o cliente deverá fornecer
+                                uma licença ou chave válida.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Como posso solicitar um atendimento?</summary>
+                        <div class="faq-resposta">
+                            <p>
+                                Entre em contato pelo WhatsApp da Sandoval TI,
+                                explique o que está acontecendo com seu
+                                equipamento e combine os detalhes do atendimento.
+                            </p>
+                        </div>
+                    </details>
 
                 </div>
 
@@ -199,17 +616,12 @@
 
         <!-- SEÇÃO SOBRE -->
         <section class="sobre" id="sobre">
-
             <div class="container">
-
                 <div class="sobre-conteudo">
-
-                    <!-- Identificação da seção -->
                     <span class="sobre-destaque">CONHEÇA A SANDOVAL TI</span>
 
                     <h2>
-                        Tecnologia com
-                        <span>atenção e compromisso.</span>
+                        Tecnologia com <span>atenção e compromisso.</span>
                     </h2>
 
                     <p>
@@ -218,15 +630,18 @@
                     </p>
 
                     <p>
-                        Nosso objetivo é oferecer atendimento cuidadoso,
-                        orientação clara e soluções adequadas às necessidades
+                        Trabalhamos com mão de obra especializada, buscando oferecer
+                        um atendimento cuidadoso, transparente e adequado à necessidade
                         de cada cliente.
                     </p>
 
+                    <p>
+                        Para maior comodidade, realizamos a busca e a entrega do notebook
+                        no bairro São Raimundo. Para bairros próximos, a disponibilidade
+                        e as condições são combinadas diretamente com o cliente.
+                    </p>
                 </div>
-
             </div>
-
         </section>
 
 
@@ -245,9 +660,10 @@
                     </h2>
 
                     <p>
-                        Entre em contato com a Sandoval TI.
-                        Estamos à disposição para entender sua necessidade
-                        e apresentar uma solução.
+                        Entre em contato pelo WhatsApp, conte o que está
+                        acontecendo com seu equipamento e tire suas dúvidas.
+                        Vamos conversar para entender sua necessidade e combinar
+                        a melhor forma de atendimento.
                     </p>
 
                     <div class="contato-botoes">
@@ -280,13 +696,24 @@
     </main>
 
 
-    <!-- RODAPÉ -->
-    <footer class="rodape">
-        <div class="container">
-            © 2026 Sandoval TI - Serviços Técnicos em Informática.
-            Todos os direitos reservados.
-        </div>
-    </footer>
+        <!-- RODAPÉ -->
+        <footer class="rodape">
+            <div class="container">
+                <p>
+                    © 2026 Sandoval TI - Serviços Técnicos em Informática.
+                    Todos os direitos reservados.
+                </p>
+
+                <a href="https://www.instagram.com/_sandoval_ti/"
+                target="_blank"
+                rel="noopener noreferrer">
+                    @_sandoval_ti
+                </a>
+            </div>
+        </footer>
+
+    <script src="{% static 'institucional/menu.js' %}" defer></script>
+    <script src="{% static 'institucional/servicos.js' %}" defer></script>
 
 </body>
 </html>
