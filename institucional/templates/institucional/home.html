@@ -40,19 +40,20 @@
 
             </button>
 
-            
             <!-- MENU E CONTATO -->
             <div class="menu-area" id="menu-principal">
 
                 <nav class="menu" aria-label="Menu principal">
                     <a href="#inicio">Início</a>
+                    <a href="#problemas">Problemas</a>
                     <a href="#servicos">Serviços</a>
                     <a href="#faq">FAQ</a>
                     <a href="#sobre">Sobre</a>
                     <a href="#contato">Contato</a>
                 </nav>
 
-                <a href="https://wa.me/92991583740"
+                <!-- WHATSAPP: CABEÇALHO -->
+                <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Conheci%20a%20Sandoval%20TI%20pelo%20site%20e%20gostaria%20de%20conhecer%20os%20servi%C3%A7os%20e%20as%20formas%20de%20atendimento."
                 class="botao-contato"
                 target="_blank"
                 rel="noopener noreferrer">
@@ -65,64 +66,185 @@
         </div>
     </header>
 
-
-
     <!-- APRESENTAÇÃO PRINCIPAL -->
     <main>
 
-        
-    <section class="hero" id="inicio">
-        <div class="container">
+        <section class="hero" id="inicio">
+            <div class="container">
 
-            <div class="hero-layout">
+                <div class="hero-layout">
 
-                <div class="hero-conteudo">
+                    <div class="hero-conteudo">
 
-                    <span class="hero-destaque">
-                        Tecnologia e soluções em informática
-                    </span>
+                        <span class="hero-destaque">
+                            Tecnologia e soluções em informática
+                        </span>
 
-                    <h1>
-                        Seu equipamento merece
-                        <span>o melhor cuidado.</span>
-                    </h1>
+                        <h1>
+                            Seu equipamento merece
+                            <span>o melhor cuidado.</span>
+                        </h1>
 
-                    <p>
-                        Serviços técnicos em informática com atenção,
-                        qualidade e compromisso. Soluções para notebooks,
-                        computadores e equipamentos do seu dia a dia.
-                    </p>
+                        <p>
+                            Serviços técnicos em informática com atenção,
+                            qualidade e compromisso. Soluções para notebooks,
+                            computadores e equipamentos do seu dia a dia.
+                        </p>
 
-                    <div class="hero-botoes">
+                        <div class="hero-botoes">
 
-                        <a href="https://wa.me/92991583740"
-                        class="botao-contato"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                            Solicitar atendimento
-                        </a>
+                            <!-- WHATSAPP: APRESENTAÇÃO PRINCIPAL -->
+                            <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20atendimento%20para%20meu%20equipamento.%20Poderia%20me%20orientar%3F"
+                            class="botao-contato"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                                Solicitar atendimento
+                            </a>
 
-                        <a href="#servicos" class="botao-secundario">
-                            Conheça nossos serviços
-                        </a>
+                            <a href="#servicos" class="botao-secundario">
+                                Conheça nossos serviços
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="hero-imagem">
+
+                        <img src="{% static 'institucional/img/banner-sandoval-ti.png' %}"
+                            alt="Notebook e ferramentas em ambiente profissional de informática">
 
                     </div>
 
                 </div>
 
-                <div class="hero-imagem">
-                    <img src="{% static 'institucional/img/hero-notebook.jpg' %}"
-                        alt="Notebook em ambiente tecnológico">
+            </div>
+        </section>
+
+        <!-- SEÇÃO IDENTIFIQUE SEU PROBLEMA -->
+        <section class="problemas" id="problemas">
+
+            <div class="container">
+
+                <div class="problemas-conteudo">
+
+                    <div class="problemas-titulo">
+                        <span>PRECISA DE AJUDA?</span>
+
+                        <h2>Identifique seu problema</h2>
+
+                        <p>
+                            Está com dificuldades no seu notebook, computador
+                            ou impressora? Conte para nós o que está acontecendo.
+                            Vamos entender sua necessidade.
+                        </p>
+                    </div>
+
+                    <form id="form-problema" class="form-problema">
+
+                        <div class="campo-problema">
+                            <label for="nome-cliente">
+                                Seu nome (opcional)
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nome-cliente"
+                                name="nome"
+                                placeholder="Como podemos chamar você?"
+                                autocomplete="name">
+                        </div>
+
+                        <div class="campo-problema">
+                            <label for="equipamento">
+                                1. Qual equipamento precisa de atendimento?
+                            </label>
+
+                            <select id="equipamento" name="equipamento" required>
+                                <option value="">Selecione o equipamento</option>
+                                <option value="Notebook">Notebook</option>
+                                <option value="Computador">Computador</option>
+                                <option value="Impressora">Impressora</option>
+                                <option value="Outro equipamento">Outro equipamento</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-problema">
+                            <label for="problema">
+                                2. Qual problema está apresentando?
+                            </label>
+
+                            <select id="problema" name="problema" required>
+                                <option value="">Selecione o problema</option>
+                                <option value="Meu equipamento está lento ou travando">
+                                    Está lento ou travando
+                                </option>
+                                <option value="Meu equipamento está esquentando muito">
+                                    Está esquentando muito
+                                </option>
+                                <option value="Meu equipamento não liga">
+                                    Não liga
+                                </option>
+                                <option value="O Windows apresenta erros ou falhas">
+                                    Windows apresenta erros ou falhas
+                                </option>
+                                <option value="Preciso formatar meu equipamento">
+                                    Preciso formatar
+                                </option>
+                                <option value="Preciso de limpeza interna">
+                                    Preciso de limpeza interna
+                                </option>
+                                <option value="Preciso trocar o HD ou unidade de armazenamento">
+                                    Preciso trocar o HD ou unidade de armazenamento
+                                </option>
+                                <option value="Preciso instalar programas">
+                                    Preciso instalar programas
+                                </option>
+                                <option value="Minha impressora não funciona">
+                                    Minha impressora não funciona
+                                </option>
+                                <option value="Preciso configurar meu equipamento novo">
+                                    Preciso configurar um equipamento novo
+                                </option>
+                                <option value="Preciso realizar backup dos meus arquivos">
+                                    Preciso realizar backup dos meus arquivos
+                                </option>
+                                <option value="Outro problema">
+                                    Outro problema
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="campo-problema">
+                            <label for="detalhes-problema">
+                                3. Conte um pouco mais sobre o que está acontecendo (opcional)
+                            </label>
+
+                            <textarea
+                                id="detalhes-problema"
+                                name="detalhes"
+                                rows="4"
+                                placeholder="Descreva o problema, quando começou ou outras informações que considerar importantes..."></textarea>
+                        </div>
+
+                        <button type="submit" class="botao-contato">
+                            <i class="bi bi-whatsapp"></i>
+                            Enviar solicitação pelo WhatsApp
+                        </button>
+
+                        <p class="problemas-aviso">
+                            Suas informações serão utilizadas apenas para
+                            preparar sua solicitação de atendimento pelo WhatsApp.
+                        </p>
+
+                    </form>
+
                 </div>
 
             </div>
 
-        </div>
-    </section>
+        </section>
 
-
-
-        
         <!-- SEÇÃO DE SERVIÇOS -->
         <section class="servicos" id="servicos">
 
@@ -180,7 +302,6 @@
 
                     </article>
 
-
                     <!-- Serviço 2 -->
                     <article class="servico-card">
 
@@ -219,7 +340,6 @@
                         </div>
 
                     </article>
-
 
                     <!-- Serviço 3 -->
                     <article class="servico-card">
@@ -260,7 +380,6 @@
 
                     </article>
 
-
                     <!-- Serviço 4 -->
                     <article class="servico-card">
 
@@ -270,7 +389,7 @@
                             loading="lazy">
 
                         <div class="servico-card-conteudo">
-                            <h3>Troca de HD </h3>
+                            <h3>Troca de HD</h3>
 
                             <p class="servico-resumo">
                                 Substituição da unidade de armazenamento
@@ -299,7 +418,6 @@
                         </div>
 
                     </article>
-
 
                     <!-- Serviço 5 -->
                     <article class="servico-card">
@@ -338,7 +456,6 @@
                         </div>
 
                     </article>
-
 
                     <!-- Serviço 6 -->
                     <article class="servico-card">
@@ -379,7 +496,6 @@
 
                     </article>
 
-
                     <!-- Serviço 7 -->
                     <article class="servico-card">
 
@@ -419,7 +535,6 @@
 
                     </article>
 
-
                     <!-- Serviço 8 -->
                     <article class="servico-card">
 
@@ -457,7 +572,6 @@
                         </div>
 
                     </article>
-
 
                     <!-- Serviço 9 -->
                     <article class="servico-card">
@@ -503,7 +617,6 @@
             </div>
 
         </section>
-
 
         <!-- SEÇÃO PERGUNTAS FREQUENTES -->
         <section class="faq" id="faq">
@@ -613,7 +726,6 @@
 
         </section>
 
-
         <!-- SEÇÃO SOBRE -->
         <section class="sobre" id="sobre">
             <div class="container">
@@ -644,7 +756,6 @@
             </div>
         </section>
 
-
         <!-- SEÇÃO CONTATO -->
         <section class="contato" id="contato">
 
@@ -668,7 +779,8 @@
 
                     <div class="contato-botoes">
 
-                        <a href="https://wa.me/92991583740"
+                        <!-- WHATSAPP: SEÇÃO DE CONTATO -->
+                        <a href="https://wa.me/92991583740?text=Ol%C3%A1!%20Vim%20pela%20se%C3%A7%C3%A3o%20de%20contato%20do%20site%20e%20gostaria%20de%20tirar%20algumas%20d%C3%BAvidas%20e%20combinar%20um%20atendimento."
                         class="botao-contato"
                         target="_blank"
                         rel="noopener noreferrer">
@@ -690,27 +802,71 @@
 
         </section>
 
-
-
-
     </main>
 
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+        <div class="container">
+            <p>
+                © 2026 Sandoval TI - Serviços Técnicos em Informática.
+                Todos os direitos reservados.
+            </p>
 
-        <!-- RODAPÉ -->
-        <footer class="rodape">
-            <div class="container">
-                <p>
-                    © 2026 Sandoval TI - Serviços Técnicos em Informática.
-                    Todos os direitos reservados.
-                </p>
+            <a href="https://www.instagram.com/_sandoval_ti/"
+            target="_blank"
+            rel="noopener noreferrer">
+                @_sandoval_ti
+            </a>
+        </div>
+    </footer>
 
-                <a href="https://www.instagram.com/_sandoval_ti/"
-                target="_blank"
-                rel="noopener noreferrer">
-                    @_sandoval_ti
-                </a>
-            </div>
-        </footer>
+    <!-- ENVIO DO FORMULÁRIO PARA O WHATSAPP -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const formulario = document.getElementById("form-problema");
+
+            if (!formulario) {
+                return;
+            }
+
+            formulario.addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                const nome = document.getElementById("nome-cliente").value.trim();
+                const equipamento = document.getElementById("equipamento").value;
+                const problema = document.getElementById("problema").value;
+                const detalhes = document.getElementById("detalhes-problema").value.trim();
+
+                if (!equipamento || !problema) {
+                    alert("Por favor, selecione o equipamento e o problema apresentado.");
+                    return;
+                }
+
+                let mensagem = "Olá! Gostaria de solicitar atendimento na Sandoval TI.\n\n";
+
+                if (nome) {
+                    mensagem += "Nome: " + nome + "\n";
+                }
+
+                mensagem += "Equipamento: " + equipamento + "\n";
+                mensagem += "Problema: " + problema + "\n";
+
+                if (detalhes) {
+                    mensagem += "Detalhes: " + detalhes + "\n";
+                }
+
+                mensagem += "\nVim pelo formulário de problemas do site.";
+
+                const url = "https://wa.me/92991583740?text=" + encodeURIComponent(mensagem);
+
+                window.open(url, "_blank", "noopener,noreferrer");
+
+            });
+
+        });
+    </script>
 
     <script src="{% static 'institucional/menu.js' %}" defer></script>
     <script src="{% static 'institucional/servicos.js' %}" defer></script>

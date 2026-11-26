@@ -1161,3 +1161,246 @@ html {
 }
 
 
+
+/* =================================
+   SEÇÃO IDENTIFIQUE SEU PROBLEMA
+================================= */
+
+.problemas {
+    padding: 90px 0;
+    background-color: var(--cor-fundo);
+}
+
+.problemas-conteudo {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.problemas-titulo {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.problemas-titulo span {
+    display: inline-block;
+    color: var(--cor-azul-claro);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+.problemas-titulo h2 {
+    color: var(--cor-texto);
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.problemas-titulo p {
+    color: var(--cor-texto-secundario);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* FORMULÁRIO */
+
+.form-problema {
+    padding: 35px;
+    background-color: var(--cor-fundo-secundario);
+    border: 1px solid rgba(8, 124, 255, 0.25);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+/* CAMPOS DO FORMULÁRIO */
+
+.campo-problema {
+    margin-bottom: 25px;
+}
+
+.campo-problema label {
+    display: block;
+    color: var(--cor-texto);
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.campo-problema input,
+.campo-problema select,
+.campo-problema textarea {
+    display: block;
+    width: 100%;
+    padding: 14px 15px;
+
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+
+    border: 1px solid rgba(170, 184, 204, 0.25);
+    border-radius: 7px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* PLACEHOLDER */
+
+.campo-problema input::placeholder,
+.campo-problema textarea::placeholder {
+    color: #8291a8;
+}
+
+
+/* LISTA DE OPÇÕES */
+
+.campo-problema select {
+    cursor: pointer;
+}
+
+.campo-problema select option {
+    background-color: var(--cor-fundo-secundario);
+    color: var(--cor-texto);
+}
+
+
+/* CAMPO DE TEXTO */
+
+.campo-problema textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+
+/* DESTAQUE AO SELECIONAR OU DIGITAR */
+
+.campo-problema input:focus,
+.campo-problema select:focus,
+.campo-problema textarea:focus {
+    border-color: var(--cor-azul);
+    box-shadow: 0 0 0 3px rgba(8, 124, 255, 0.15);
+}
+
+
+/* BOTÃO DE ENVIO */
+
+.form-problema .botao-contato {
+    width: 100%;
+    min-height: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.form-problema .botao-contato i {
+    font-size: 20px;
+}
+
+
+/* AVISO DE PRIVACIDADE */
+
+.problemas-aviso {
+    margin-top: 18px;
+    color: var(--cor-texto-secundario);
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+
+/* ACESSIBILIDADE - FOCO PELO TECLADO */
+
+.form-problema .botao-contato:focus-visible {
+    outline: 2px solid var(--cor-azul-claro);
+    outline-offset: 4px;
+}
+
+
+/* =================================
+   RESPONSIVIDADE - SEÇÃO PROBLEMAS
+================================= */
+
+@media (max-width: 768px) {
+
+    .problemas {
+        padding: 65px 0;
+    }
+
+    .problemas-titulo {
+        margin-bottom: 30px;
+    }
+
+    .problemas-titulo h2 {
+        font-size: 29px;
+    }
+
+    .problemas-titulo p {
+        font-size: 15px;
+    }
+
+    .form-problema {
+        padding: 28px;
+    }
+
+}
+
+
+/* =================================
+   RESPONSIVIDADE - CELULARES
+================================= */
+
+@media (max-width: 480px) {
+
+    .problemas {
+        padding: 60px 0;
+    }
+
+    .problemas-titulo h2 {
+        font-size: 27px;
+    }
+
+    .problemas-titulo span {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .problemas-titulo p {
+        font-size: 14px;
+    }
+
+    .form-problema {
+        padding: 22px 18px;
+    }
+
+    .campo-problema {
+        margin-bottom: 22px;
+    }
+
+    .campo-problema label {
+        font-size: 14px;
+    }
+
+    .campo-problema input,
+    .campo-problema select,
+    .campo-problema textarea {
+        padding: 13px;
+        font-size: 14px;
+    }
+
+    .form-problema .botao-contato {
+        padding: 14px 12px;
+        font-size: 14px;
+    }
+
+    .problemas-aviso {
+        font-size: 11px;
+    }
+
+}
